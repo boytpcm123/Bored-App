@@ -1,0 +1,56 @@
+PODS:
+  - Alamofire (5.5.0)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Nimble (9.2.1)
+  - ProgressHUD (2.70)
+  - Quick (4.0.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SwiftLint (0.46.5)
+  - Wormholy (1.6.5)
+
+DEPENDENCIES:
+  - Moya (~> 15.0.0)
+  - Nimble (~> 9.2.1)
+  - ProgressHUD (~> 2.70)
+  - Quick (~> 4.0.0)
+  - RxCocoa (~> 6.5.0)
+  - RxSwift (~> 6.5.0)
+  - SwiftLint (~> 0.46.5)
+  - Wormholy (~> 1.6.5)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Moya
+    - Nimble
+    - ProgressHUD
+    - Quick
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SwiftLint
+    - Wormholy
+
+SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
+  ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SwiftLint: 2c16e8fa99dac2e440dc0c70ea74d2532048f6cf
+  Wormholy: 3252bc3e55a1847ef9a0976c1377bd77bf3635fa
+
+PODFILE CHECKSUM: 7d632d9922d6f494278449bff6cfe59aa8932a97
+
+COCOAPODS: 1.11.3
