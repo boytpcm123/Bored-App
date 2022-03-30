@@ -1,0 +1,21 @@
+MY_APP_ID = "com.sonans.BoredApp"
+SCHEME_APP = "BoredApp"
+SCHEME_APP_TEST = "BoredAppTests"
+SCHEME_APP_UI_TEST = "BoredAppUITests"
+
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Before All"
+  before_all do
+
+  end
+
+  desc "Test App"
+  lane :tests do
+    run_tests(scheme: SCHEME_APP_TEST)
+    run_tests(scheme: SCHEME_APP_UI_TEST)
+  end
+end
