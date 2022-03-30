@@ -30,6 +30,8 @@
 		5917299227F4A0720080303E /* BoredService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917296627F4A0720080303E /* BoredService.swift */; };
 		5917299927F4A0720080303E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917297227F4A0720080303E /* Constants.swift */; };
 		5917299A27F4A0720080303E /* Constants+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917297327F4A0720080303E /* Constants+API.swift */; };
+		5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917299D27F4A6F70080303E /* ActivityModel.swift */; };
+		591729A027F4A8D60080303E /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917299F27F4A8D60080303E /* ActivityViewModel.swift */; };
 		6A2A965077F63BC498E6D570 /* Pods_BoredAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */; };
 		D4194D8C75197F08C7E5AC98 /* Pods_BoredApp_BoredAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386F0F88CF660DF94230F5F0 /* Pods_BoredApp_BoredAppUITests.framework */; };
 		DD5692487999A530D5D6BD1A /* Pods_BoredApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */; };
@@ -69,7 +71,7 @@
 		5917291227F4957F0080303E /* BoredAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoredAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5917291627F4957F0080303E /* BoredAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoredAppUITests.swift; sourceTree = "<group>"; };
 		5917291827F4957F0080303E /* BoredAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoredAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5917292A27F49EE50080303E /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = BoredApp/Configurations/Fastlane/Fastfile; sourceTree = SOURCE_ROOT; };
+		5917292A27F49EE50080303E /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = SOURCE_ROOT; };
 		5917293327F4A0720080303E /* Color+Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Application.swift"; sourceTree = "<group>"; };
 		5917293427F4A0720080303E /* UIView+Subviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		5917293527F4A0720080303E /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 		5917296627F4A0720080303E /* BoredService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoredService.swift; sourceTree = "<group>"; };
 		5917297227F4A0720080303E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5917297327F4A0720080303E /* Constants+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+API.swift"; sourceTree = "<group>"; };
+		5917299D27F4A6F70080303E /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		5917299F27F4A8D60080303E /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		876190E23234BC92FEB5AAD7 /* Pods-BoredApp-BoredAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoredApp-BoredAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BoredApp-BoredAppUITests/Pods-BoredApp-BoredAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,6 +370,7 @@
 		5917296E27F4A0720080303E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5917299D27F4A6F70080303E /* ActivityModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 		5917299C27F4A1460080303E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5917299F27F4A8D60080303E /* ActivityViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -693,12 +699,14 @@
 				5917297427F4A0720080303E /* Color+Application.swift in Sources */,
 				5917299227F4A0720080303E /* BoredService.swift in Sources */,
 				5917298827F4A0720080303E /* BaseViewController.swift in Sources */,
+				591729A027F4A8D60080303E /* ActivityViewModel.swift in Sources */,
 				5917299127F4A0720080303E /* BoredNetworkManager.swift in Sources */,
 				591728F627F4957E0080303E /* AppDelegate.swift in Sources */,
 				5917299A27F4A0720080303E /* Constants+API.swift in Sources */,
 				5917299927F4A0720080303E /* Constants.swift in Sources */,
 				591728F827F4957E0080303E /* SceneDelegate.swift in Sources */,
 				5917297727F4A0720080303E /* Optional+Unwrap.swift in Sources */,
+				5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */,
 				5917298727F4A0720080303E /* HomeScreenController.swift in Sources */,
 				5917297527F4A0720080303E /* UIView+Subviews.swift in Sources */,
 				5917297627F4A0720080303E /* UITableView+Extension.swift in Sources */,

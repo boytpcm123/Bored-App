@@ -17,7 +17,7 @@ extension BoredService: TargetType {
     
     var baseURL: URL {
         // swiftlint:disable:next force_unwrapping
-        URL(string: "https://my-json-server.typicode.com/imkhan334/demo-1")!
+        URL(string: "")!
     }
     
     var path: String {
