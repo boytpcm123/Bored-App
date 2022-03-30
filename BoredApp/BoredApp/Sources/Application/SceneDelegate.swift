@@ -24,7 +24,6 @@ extension SceneDelegate {
     
     private func setRootViewController(_ viewController: UIViewController) {
         let navVC: UINavigationController = UINavigationController(rootViewController: viewController)
-        navVC.navigationBar.isHidden = true
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }

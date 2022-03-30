@@ -32,6 +32,8 @@
 		5917299A27F4A0720080303E /* Constants+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917297327F4A0720080303E /* Constants+API.swift */; };
 		5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917299D27F4A6F70080303E /* ActivityModel.swift */; };
 		591729A027F4A8D60080303E /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917299F27F4A8D60080303E /* ActivityViewModel.swift */; };
+		591729A327F4BC9A0080303E /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729A127F4BC9A0080303E /* ActivityCell.swift */; };
+		591729A427F4BC9A0080303E /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729A227F4BC9A0080303E /* ActivityCell.xib */; };
 		6A2A965077F63BC498E6D570 /* Pods_BoredAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */; };
 		D4194D8C75197F08C7E5AC98 /* Pods_BoredApp_BoredAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386F0F88CF660DF94230F5F0 /* Pods_BoredApp_BoredAppUITests.framework */; };
 		DD5692487999A530D5D6BD1A /* Pods_BoredApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */; };
@@ -89,6 +91,8 @@
 		5917297327F4A0720080303E /* Constants+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+API.swift"; sourceTree = "<group>"; };
 		5917299D27F4A6F70080303E /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		5917299F27F4A8D60080303E /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		591729A127F4BC9A0080303E /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		591729A227F4BC9A0080303E /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		876190E23234BC92FEB5AAD7 /* Pods-BoredApp-BoredAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoredApp-BoredAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BoredApp-BoredAppUITests/Pods-BoredApp-BoredAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -344,6 +348,8 @@
 		5917295927F4A0720080303E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				591729A127F4BC9A0080303E /* ActivityCell.swift */,
+				591729A227F4BC9A0080303E /* ActivityCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -530,6 +536,7 @@
 				5917290227F4957F0080303E /* LaunchScreen.storyboard in Resources */,
 				591728FF27F4957F0080303E /* Assets.xcassets in Resources */,
 				5917292B27F49EE50080303E /* Fastfile in Resources */,
+				591729A427F4BC9A0080303E /* ActivityCell.xib in Resources */,
 				5917298527F4A0720080303E /* HomeScreenController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,6 +704,7 @@
 				5917298927F4A0720080303E /* BaseViewModel.swift in Sources */,
 				5917297827F4A0720080303E /* Typealiases.swift in Sources */,
 				5917297427F4A0720080303E /* Color+Application.swift in Sources */,
+				591729A327F4BC9A0080303E /* ActivityCell.swift in Sources */,
 				5917299227F4A0720080303E /* BoredService.swift in Sources */,
 				5917298827F4A0720080303E /* BaseViewController.swift in Sources */,
 				591729A027F4A8D60080303E /* ActivityViewModel.swift in Sources */,

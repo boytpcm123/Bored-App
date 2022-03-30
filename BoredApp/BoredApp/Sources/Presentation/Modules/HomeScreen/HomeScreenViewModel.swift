@@ -9,4 +9,6 @@ import UIKit
 
 struct HomeScreenViewModel {
     
+    let title = "Restaurant"
+    
 }
