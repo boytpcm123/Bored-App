@@ -29,6 +29,7 @@ class HomeScreenController: BaseViewController {
             self.tableView.dataSource = self
         }
     }
+    @IBOutlet private weak var settingBtn: UIButton!
     
     // MARK: - PROPERTIES
     private var viewModel: HomeScreenViewModel!
@@ -41,6 +42,7 @@ class HomeScreenController: BaseViewController {
         super.viewDidLoad()
         
         setupUI()
+        bindSettingBtn()
         bindData()
         fetchActivities()
     }
@@ -92,6 +94,18 @@ extension HomeScreenController {
     
     fileprivate func fetchActivities() {
         viewModel.fetchActivities()
+    }
+    
+    fileprivate func bindSettingBtn() {
+        settingBtn.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                let controller = SettingScreenController.instantiate()
+                let navVC: UINavigationController = UINavigationController(rootViewController: controller)
+                navVC.modalPresentationStyle = .automatic
+                self?.present(navVC, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
     
 }

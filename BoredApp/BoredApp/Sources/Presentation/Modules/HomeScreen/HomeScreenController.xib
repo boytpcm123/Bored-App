@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeScreenController" customModule="BoredApp" customModuleProvider="target">
             <connections>
+                <outlet property="settingBtn" destination="n0L-CO-pgq" id="Ret-z8-Ike"/>
                 <outlet property="tableView" destination="GUK-pw-f5U" id="EY2-AF-gWs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,12 +40,24 @@
                         </tableView>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0L-CO-pgq">
+                    <rect key="frame" x="322" y="770" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="XUN-de-9do"/>
+                        <constraint firstAttribute="width" secondItem="n0L-CO-pgq" secondAttribute="height" id="lGp-r9-oHZ"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" backgroundImage="filter-edit-icon"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="BackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="n0L-CO-pgq" secondAttribute="bottom" constant="32" id="1w0-ub-mMO"/>
                 <constraint firstItem="C0u-VC-rfJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CBu-Nu-W9t"/>
                 <constraint firstAttribute="trailing" secondItem="C0u-VC-rfJ" secondAttribute="trailing" id="eq1-KM-xYG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="n0L-CO-pgq" secondAttribute="trailing" constant="32" id="oWu-C9-M1u"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="C0u-VC-rfJ" secondAttribute="bottom" id="uQq-Jg-SK1"/>
                 <constraint firstItem="C0u-VC-rfJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="xIc-RJ-8BY"/>
             </constraints>
@@ -52,6 +65,7 @@
         </view>
     </objects>
     <resources>
+        <image name="filter-edit-icon" width="33" height="33"/>
         <namedColor name="BackgroundColor">
             <color red="0.97254901960784312" green="0.97254901960784312" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
