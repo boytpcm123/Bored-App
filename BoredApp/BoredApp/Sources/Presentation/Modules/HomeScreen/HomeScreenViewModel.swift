@@ -20,6 +20,7 @@ class HomeScreenViewModel {
     private let labelQueue = "com.thong.BoredApp.queue"
     
     let publishListActivityGroup = PublishSubject<[ActivityGroupViewModel]>()
+    let showLoading = BehaviorSubject<Bool>(value: true)
     
     init(boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager()) {
         self.boredNetworkManager = boredNetworkManager
@@ -47,7 +48,7 @@ extension HomeScreenViewModel {
             
             dispatchQueue.async {
                 // print("Check calling ", activityType)
-                for _ in 0..<Constants.limitActivity {
+                for index in 0..<Constants.limitActivity {
                     self.boredNetworkManager
                         .getActivity(withType: activityType)
                         .subscribe( onSuccess: {
@@ -60,6 +61,10 @@ extension HomeScreenViewModel {
                             }
                         }, onFailure: { error in
                             print("error ", error.localizedDescription, activityType)
+                            // Check prevent error when some activity change type
+                            if index == Constants.limitActivity - 1 {
+                                dispatchGroup.leave()
+                            }
                         }, onDisposed: {
                             dispatchSemaphore.signal()
                         })
@@ -72,6 +77,7 @@ extension HomeScreenViewModel {
         dispatchGroup.notify(queue: .main) {
             print("Finished ", listActivityGroup.count)
             self.publishListActivityGroup.onNext(listActivityGroup)
+            self.showLoading.onNext(false)
         }
     }
 }

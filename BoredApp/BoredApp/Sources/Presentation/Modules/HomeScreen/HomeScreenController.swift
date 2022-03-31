@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import ProgressHUD
 
 class HomeScreenController: BaseViewController {
     
@@ -27,13 +28,15 @@ class HomeScreenController: BaseViewController {
     private var viewModel = HomeScreenViewModel()
     private let disposeBag = DisposeBag()
     private var listActivityGroup: [ActivityGroupViewModel] = []
+    private let refreshControl = UIRefreshControl()
     
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        setupData()
+        bindData()
+        fetchActivities()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,22 +47,44 @@ class HomeScreenController: BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension HomeScreenController {
     
-    func setupUI() {
+    fileprivate func setupUI() {
         
         self.title = viewModel.title
-        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.refreshControl = refreshControl
     }
     
-    func setupData() {
+    fileprivate func bindData() {
         
-        viewModel.publishListActivityGroup
-            .catchAndReturn([])
-            .subscribe(onNext: {
-                self.listActivityGroup = $0
-                self.tableView.reloadData()
+        refreshControl.rx
+            .controlEvent(.valueChanged)
+            .asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchActivities()
+                ProgressHUD.show()
             })
             .disposed(by: disposeBag)
         
+        viewModel.showLoading
+            .subscribe(onNext: { [weak self] isLoading in
+                isLoading ? ProgressHUD.show() : ProgressHUD.dismiss()
+                if !isLoading {
+                    self?.refreshControl.endRefreshing()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.publishListActivityGroup
+            .catchAndReturn([])
+            .subscribe(onNext: { [weak self] listActivityGroup in
+                self?.listActivityGroup = listActivityGroup
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    fileprivate func fetchActivities() {
         viewModel.fetchActivities()
     }
     

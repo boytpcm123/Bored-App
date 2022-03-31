@@ -17,9 +17,9 @@ enum ActivityType: String, Decodable, CaseIterable {
     case cooking
     case relaxation
     case music
-    case busywork
+    case busyWork
     
-    var description: String { self.rawValue }
+    var description: String { self.rawValue.lowercased() }
 }
 
 struct ActivityModel: Decodable, Hashable {
