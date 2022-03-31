@@ -5,16 +5,13 @@
 //  Created by hungdat1234 on 3/30/22.
 //
 
-import UIKit
+import Foundation
 import RxSwift
-import Moya
 
-class HomeScreenViewModel {
+struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
-    let title = "Home"
-    var listActivityType = ActivityType.allCases
-    
+    private let listActivityType = ActivityType.allCases
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
     private let labelQueue = "com.thong.BoredApp.queue"
@@ -30,8 +27,21 @@ class HomeScreenViewModel {
 // MARK: - PUBLIC FUNCTIONS
 extension HomeScreenViewModel {
     
-    func getNameType(atSection section: Int) -> String {
-        return listActivityType[section].description.capitalized
+    func getTitleScreen() -> String {
+        return "Are you bored?"
+    }
+    
+    func getNameType(with listActivityGroup: [ActivityGroupViewModel], atSection section: Int) -> String {
+        let activityGroupViewModel = listActivityGroup[section]
+        return activityGroupViewModel.getTypeActivity()
+    }
+    
+    func getActivityViewModel(with listActivityGroup: [ActivityGroupViewModel],
+                              indexPath: IndexPath) -> ActivityViewModel {
+        
+        let activityGroupViewModel = listActivityGroup[indexPath.section]
+        let activityViewModel = activityGroupViewModel.getActivity(atIndex: indexPath.row)
+        return activityViewModel
     }
     
     func fetchActivities() {

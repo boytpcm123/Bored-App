@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ActivityViewModel: Hashable {
+struct ActivityViewModel {
     
     private let activityModel: ActivityModel
     
@@ -20,7 +20,7 @@ struct ActivityViewModel: Hashable {
 extension ActivityViewModel {
     
     func getType() -> String {
-        return activityModel.type.description
+        return activityModel.type.lowercased()
     }
     
     func getActivity() -> String {
@@ -31,8 +31,16 @@ extension ActivityViewModel {
         return "\(activityModel.accessibility)"
     }
     
+    func getPrice() -> String {
+        return "\(activityModel.price)"
+    }
+    
     func getParticipants() -> String {
         return "\(activityModel.participants)"
+    }
+    
+    func getLink() -> String {
+        return activityModel.link ?? ""
     }
     
 }

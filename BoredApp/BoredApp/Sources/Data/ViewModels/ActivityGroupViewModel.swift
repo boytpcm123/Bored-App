@@ -19,6 +19,10 @@ struct ActivityGroupViewModel {
 // MARK: - SUPPORT FUNCTIONS
 extension ActivityGroupViewModel {
     
+    func getTypeActivity() -> String {
+        return activityGroupModel.activityType.description.capitalized
+    }
+    
     func getListActivity() -> [ActivityModel] {
         return activityGroupModel.listActivity
     }

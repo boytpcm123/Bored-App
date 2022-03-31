@@ -22,7 +22,7 @@ enum ActivityType: String, Decodable, CaseIterable {
     var description: String { self.rawValue.lowercased() }
 }
 
-struct ActivityModel: Decodable, Hashable {
+struct ActivityModel: Decodable {
     
     let activity: String
     let type: String

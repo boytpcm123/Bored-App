@@ -15,15 +15,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
-        setRootViewController(HomeScreenController())
+        setRootViewController()
     }
 }
 
 // MARK: - SUPPORT FUCTIONS
 extension SceneDelegate {
     
-    private func setRootViewController(_ viewController: UIViewController) {
-        let navVC: UINavigationController = UINavigationController(rootViewController: viewController)
+    private func setRootViewController() {
+        let controller = HomeScreenController.instantiate()
+        let navVC: UINavigationController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }

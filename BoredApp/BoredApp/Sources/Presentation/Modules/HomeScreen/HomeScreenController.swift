@@ -12,6 +12,12 @@ import ProgressHUD
 
 class HomeScreenController: BaseViewController {
     
+    static func instantiate() -> BaseViewController {
+        let controller = HomeScreenController()
+        controller.viewModel = HomeScreenViewModel()
+        return controller
+    }
+    
     // MARK: - OUTLET
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -25,7 +31,7 @@ class HomeScreenController: BaseViewController {
     }
     
     // MARK: - PROPERTIES
-    private var viewModel = HomeScreenViewModel()
+    private var viewModel: HomeScreenViewModel!
     private let disposeBag = DisposeBag()
     private var listActivityGroup: [ActivityGroupViewModel] = []
     private let refreshControl = UIRefreshControl()
@@ -49,7 +55,7 @@ extension HomeScreenController {
     
     fileprivate func setupUI() {
         
-        self.title = viewModel.title
+        self.title = viewModel.getTitleScreen()
         
         tableView.refreshControl = refreshControl
     }
@@ -98,9 +104,6 @@ extension HomeScreenController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if listActivityGroup.isEmpty {
-            return 0
-        }
         let activityGroupViewModel = listActivityGroup[section]
         return activityGroupViewModel.getLengthListActivity()
     }
@@ -116,7 +119,7 @@ extension HomeScreenController: UITableViewDataSource {
                     return UIView()
                 }
         
-        let nameType = viewModel.getNameType(atSection: section)
+        let nameType = viewModel.getNameType(with: listActivityGroup, atSection: section)
         activityHeaderCellView.bindData(nameType)
         return activityHeaderCellView
     }
@@ -127,8 +130,7 @@ extension HomeScreenController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let activityGroupViewModel = listActivityGroup[indexPath.section]
-        let activityViewModel = activityGroupViewModel.getActivity(atIndex: indexPath.row)
+        let activityViewModel = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
         cell.bindData(activityViewModel)
         return cell
     }
@@ -140,6 +142,9 @@ extension HomeScreenController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        print("Selected at index: ", indexPath.row)
+        
+        let activityViewModel = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
+        let controller = DetailScreenViewController.instantiate(activityViewModel: activityViewModel)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
