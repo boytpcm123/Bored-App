@@ -26,3 +26,8 @@ struct BoredNetworkManager: BoredNetworkManagerProtocol {
 extension BoredNetworkManager {
   
 }
+
+// MARK: - SUPPORT FUNCTIONS
+extension BoredNetworkManager {
+  
+}

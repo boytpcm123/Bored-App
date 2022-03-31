@@ -10,7 +10,7 @@ def working_pods
   # Rx
   pod 'RxCocoa', '~> 6.5.0'
   pod 'RxSwift', '~> 6.5.0'
-  pod 'Moya', '~> 15.0.0'
+  pod 'Moya/RxSwift', '~> 15.0'
   
   # Development
   pod 'SwiftLint', '~> 0.46.5'

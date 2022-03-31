@@ -29,7 +29,6 @@
 		5917299127F4A0720080303E /* BoredNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917296527F4A0720080303E /* BoredNetworkManager.swift */; };
 		5917299227F4A0720080303E /* BoredService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917296627F4A0720080303E /* BoredService.swift */; };
 		5917299927F4A0720080303E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917297227F4A0720080303E /* Constants.swift */; };
-		5917299A27F4A0720080303E /* Constants+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917297327F4A0720080303E /* Constants+API.swift */; };
 		5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917299D27F4A6F70080303E /* ActivityModel.swift */; };
 		591729A027F4A8D60080303E /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917299F27F4A8D60080303E /* ActivityViewModel.swift */; };
 		591729A327F4BC9A0080303E /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729A127F4BC9A0080303E /* ActivityCell.swift */; };
@@ -90,7 +89,6 @@
 		5917296527F4A0720080303E /* BoredNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoredNetworkManager.swift; sourceTree = "<group>"; };
 		5917296627F4A0720080303E /* BoredService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoredService.swift; sourceTree = "<group>"; };
 		5917297227F4A0720080303E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5917297327F4A0720080303E /* Constants+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+API.swift"; sourceTree = "<group>"; };
 		5917299D27F4A6F70080303E /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		5917299F27F4A8D60080303E /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		591729A127F4BC9A0080303E /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				5917297227F4A0720080303E /* Constants.swift */,
-				5917297327F4A0720080303E /* Constants+API.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -734,7 +731,6 @@
 				5917299127F4A0720080303E /* BoredNetworkManager.swift in Sources */,
 				591729A927F4C7120080303E /* ActivityHeaderCellView.swift in Sources */,
 				591728F627F4957E0080303E /* AppDelegate.swift in Sources */,
-				5917299A27F4A0720080303E /* Constants+API.swift in Sources */,
 				5917299927F4A0720080303E /* Constants.swift in Sources */,
 				591728F827F4957E0080303E /* SceneDelegate.swift in Sources */,
 				5917297727F4A0720080303E /* Optional+Unwrap.swift in Sources */,

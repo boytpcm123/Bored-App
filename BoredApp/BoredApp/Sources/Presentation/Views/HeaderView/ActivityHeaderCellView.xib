@@ -18,15 +18,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa7-ui-Cbn">
-                        <rect key="frame" x="16" y="16" width="308" height="19"/>
+                        <rect key="frame" x="20" y="16" width="300" height="19"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Oa7-ui-Cbn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="3S2-Uq-2aR"/>
-                    <constraint firstAttribute="trailing" secondItem="Oa7-ui-Cbn" secondAttribute="trailing" constant="16" id="6Ul-2c-4I2"/>
+                    <constraint firstItem="Oa7-ui-Cbn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3S2-Uq-2aR"/>
+                    <constraint firstAttribute="trailing" secondItem="Oa7-ui-Cbn" secondAttribute="trailing" constant="20" id="6Ul-2c-4I2"/>
                     <constraint firstItem="Oa7-ui-Cbn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Jk4-ki-l2A"/>
                     <constraint firstAttribute="bottom" secondItem="Oa7-ui-Cbn" secondAttribute="bottom" constant="16" id="sew-Uu-Z5y"/>
                 </constraints>

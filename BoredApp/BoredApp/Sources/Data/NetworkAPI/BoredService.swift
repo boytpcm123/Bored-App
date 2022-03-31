@@ -5,41 +5,37 @@
 //  Created by hungdat1234 on 3/30/22.
 //
 
-import UIKit
+import Foundation
 import Moya
 
 enum BoredService {
-    case getCallList
-    case getBuyList
+    case getActivity(String)
 }
 
 extension BoredService: TargetType {
     
-    var baseURL: URL {
-        // swiftlint:disable:next force_unwrapping
-        URL(string: "")!
-    }
+    // swiftlint:disable:next force_unwrapping
+    var baseURL: URL { URL(string: "https://www.boredapi.com/api")! }
     
     var path: String {
         switch self {
-        case .getCallList:
-            return "/call"
-        case .getBuyList:
-            return "/buy"
+        case .getActivity:
+            return "/activity"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getCallList:
-            return .get
-        case .getBuyList:
+        case .getActivity:
             return .get
         }
     }
     
     var task: Task {
-        .requestPlain
+        switch self {
+        case .getActivity(let activityType):
+            return .requestParameters(parameters: ["type": "\(activityType)"], encoding: URLEncoding.default)
+        }
     }
     
     var headers: [String: String]? {
