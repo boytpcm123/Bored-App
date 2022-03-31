@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ActivityViewModel {
+struct ActivityViewModel: Hashable {
     
     private let activityModel: ActivityModel
     
@@ -20,7 +20,7 @@ struct ActivityViewModel {
 extension ActivityViewModel {
     
     func getType() -> String {
-        return activityModel.type.rawValue
+        return activityModel.type.description
     }
     
     func getActivity() -> String {

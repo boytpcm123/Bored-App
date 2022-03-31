@@ -26,12 +26,14 @@ class HomeScreenController: BaseViewController {
     // MARK: - PROPERTIES
     private var viewModel = HomeScreenViewModel()
     private let disposeBag = DisposeBag()
+    private var listActivityGroup: [ActivityGroupViewModel] = []
     
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+        setupData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,17 +50,34 @@ extension HomeScreenController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    func setupData() {
+        
+        viewModel.publishListActivityGroup
+            .catchAndReturn([])
+            .subscribe(onNext: {
+                self.listActivityGroup = $0
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.fetchActivities()
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
 extension HomeScreenController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.listActivityType.count
+        return listActivityGroup.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if listActivityGroup.isEmpty {
+            return 0
+        }
+        let activityGroupViewModel = listActivityGroup[section]
+        return activityGroupViewModel.getLengthListActivity()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -66,12 +85,12 @@ extension HomeScreenController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        
         guard let activityHeaderCellView =
                 tableView.dequeueReusableHeaderView(headerNib: ActivityHeaderCellView.self) else {
-            return UIView()
-        }
-
+                    return UIView()
+                }
+        
         let nameType = viewModel.getNameType(atSection: section)
         activityHeaderCellView.bindData(nameType)
         return activityHeaderCellView
@@ -83,14 +102,8 @@ extension HomeScreenController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let activityModel = ActivityModel(activity: "Conquer one of your fears",
-                                          type: ActivityType.recreational,
-                                          participants: 1,
-                                          price: 0.1,
-                                          link: "",
-                                          key: "8344539",
-                                          accessibility: 0.1)
-        let activityViewModel = ActivityViewModel(activityModel: activityModel)
+        let activityGroupViewModel = listActivityGroup[indexPath.section]
+        let activityViewModel = activityGroupViewModel.getActivity(atIndex: indexPath.row)
         cell.bindData(activityViewModel)
         return cell
     }

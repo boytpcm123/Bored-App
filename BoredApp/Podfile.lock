@@ -1,9 +1,10 @@
 PODS:
   - Alamofire (5.5.0)
-  - Moya (15.0.0):
-    - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
   - Nimble (9.2.1)
   - ProgressHUD (2.70)
   - Quick (4.0.0)
@@ -17,7 +18,7 @@ PODS:
   - Wormholy (1.6.5)
 
 DEPENDENCIES:
-  - Moya (~> 15.0.0)
+  - Moya/RxSwift (~> 15.0)
   - Nimble (~> 9.2.1)
   - ProgressHUD (~> 2.70)
   - Quick (~> 4.0.0)
@@ -51,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftLint: 2c16e8fa99dac2e440dc0c70ea74d2532048f6cf
   Wormholy: 3252bc3e55a1847ef9a0976c1377bd77bf3635fa
 
-PODFILE CHECKSUM: 7d632d9922d6f494278449bff6cfe59aa8932a97
+PODFILE CHECKSUM: bb915efddd981b369a4301e849bd162d9e151f1c
 
 COCOAPODS: 1.11.3

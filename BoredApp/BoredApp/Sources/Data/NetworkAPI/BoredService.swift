@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum BoredService {
-    case getActivity(String)
+    case getActivity(ActivityType)
 }
 
 extension BoredService: TargetType {
@@ -34,7 +34,8 @@ extension BoredService: TargetType {
     var task: Task {
         switch self {
         case .getActivity(let activityType):
-            return .requestParameters(parameters: ["type": "\(activityType)"], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["type": "\(activityType.description)"],
+                                      encoding: URLEncoding.default)
         }
     }
     

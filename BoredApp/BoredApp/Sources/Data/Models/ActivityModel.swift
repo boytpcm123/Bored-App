@@ -17,15 +17,15 @@ enum ActivityType: String, Decodable, CaseIterable {
     case cooking
     case relaxation
     case music
-    case busyWork
+    case busywork
     
     var description: String { self.rawValue }
 }
 
-struct ActivityModel: Decodable {
+struct ActivityModel: Decodable, Hashable {
     
     let activity: String
-    let type: ActivityType
+    let type: String
     let participants: Int
     let price: Double
     let link: String?
