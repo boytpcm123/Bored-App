@@ -9,6 +9,11 @@ import UIKit
 
 struct HomeScreenViewModel {
     
-    let title = "Restaurant"
+    let title = "Home"
     
+    var listActivityType = ActivityType.allCases
+    
+    func getNameType(atSection section: Int) -> String {
+        return listActivityType[section].description.capitalized
+    }
 }

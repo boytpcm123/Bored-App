@@ -15,6 +15,7 @@ class HomeScreenController: BaseViewController {
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             self.tableView.registerReusedCell(cellNib: ActivityCell.self, bundle: nil)
+            self.tableView.registerReusedHeaderView(headerNib: ActivityHeaderCellView.self, bundle: nil)
             self.tableView.tableFooterView = UIView()
             self.tableView.contentInsetAdjustmentBehavior = .never
             self.tableView.delegate = self
@@ -53,11 +54,27 @@ extension HomeScreenController {
 extension HomeScreenController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+        return viewModel.listActivityType.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 51
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        guard let activityHeaderCellView =
+                tableView.dequeueReusableHeaderView(headerNib: ActivityHeaderCellView.self) else {
+            return UIView()
+        }
+
+        let nameType = viewModel.getNameType(atSection: section)
+        activityHeaderCellView.bindData(nameType)
+        return activityHeaderCellView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,6 +100,8 @@ extension HomeScreenController: UITableViewDataSource {
 extension HomeScreenController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         print("Selected at index: ", indexPath.row)
     }
 }

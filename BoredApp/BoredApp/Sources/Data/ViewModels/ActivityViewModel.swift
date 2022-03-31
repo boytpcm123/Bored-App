@@ -19,6 +19,10 @@ struct ActivityViewModel {
 // MARK: - SUPPORT FUNCTIONS
 extension ActivityViewModel {
     
+    func getType() -> String {
+        return activityModel.type.rawValue
+    }
+    
     func getActivity() -> String {
         return activityModel.activity
     }

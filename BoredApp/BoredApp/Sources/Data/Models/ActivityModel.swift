@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ActivityType: String, Decodable {
+enum ActivityType: String, Decodable, CaseIterable {
     
     case education
     case recreational
@@ -18,6 +18,8 @@ enum ActivityType: String, Decodable {
     case relaxation
     case music
     case busyWork
+    
+    var description: String { self.rawValue }
 }
 
 struct ActivityModel: Decodable {
