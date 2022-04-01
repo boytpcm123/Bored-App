@@ -11,7 +11,6 @@ import RxSwift
 struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
-    private let listActivityType = ActivityType.allCases
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
     private let labelQueue = "com.thong.BoredApp.queue"
@@ -50,9 +49,10 @@ extension HomeScreenViewModel {
         let dispatchQueue = DispatchQueue(label: labelQueue, attributes: .concurrent)
         let dispatchSemaphore = DispatchSemaphore(value: 1)
         
+        let listActivityType = ActivityType.allCases
         var listActivityGroup: [ActivityGroupViewModel] = []
         
-        for activityType in self.listActivityType {
+        for activityType in listActivityType {
             dispatchGroup.enter()
             var setActivity: [ActivityModel] = []
             

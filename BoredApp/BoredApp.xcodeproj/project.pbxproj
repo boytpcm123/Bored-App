@@ -43,6 +43,9 @@
 		591729B927F613F30080303E /* SettingScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729B727F613F30080303E /* SettingScreenController.swift */; };
 		591729BA27F613F30080303E /* SettingScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729B827F613F30080303E /* SettingScreenController.xib */; };
 		591729BC27F614130080303E /* SettingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729BB27F614130080303E /* SettingScreenViewModel.swift */; };
+		591729C227F6CF0C0080303E /* SettingActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C027F6CF0C0080303E /* SettingActivityCell.swift */; };
+		591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729C127F6CF0C0080303E /* SettingActivityCell.xib */; };
+		591729C727F6D3820080303E /* ActivitySettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C627F6D3820080303E /* ActivitySettingViewModel.swift */; };
 		6A2A965077F63BC498E6D570 /* Pods_BoredAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */; };
 		D4194D8C75197F08C7E5AC98 /* Pods_BoredApp_BoredAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386F0F88CF660DF94230F5F0 /* Pods_BoredApp_BoredAppUITests.framework */; };
 		DD5692487999A530D5D6BD1A /* Pods_BoredApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */; };
@@ -111,6 +114,9 @@
 		591729B727F613F30080303E /* SettingScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenController.swift; sourceTree = "<group>"; };
 		591729B827F613F30080303E /* SettingScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingScreenController.xib; sourceTree = "<group>"; };
 		591729BB27F614130080303E /* SettingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewModel.swift; sourceTree = "<group>"; };
+		591729C027F6CF0C0080303E /* SettingActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingActivityCell.swift; sourceTree = "<group>"; };
+		591729C127F6CF0C0080303E /* SettingActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingActivityCell.xib; sourceTree = "<group>"; };
+		591729C627F6D3820080303E /* ActivitySettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingViewModel.swift; sourceTree = "<group>"; };
 		7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		876190E23234BC92FEB5AAD7 /* Pods-BoredApp-BoredAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoredApp-BoredAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BoredApp-BoredAppUITests/Pods-BoredApp-BoredAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -415,6 +421,7 @@
 			children = (
 				5917299F27F4A8D60080303E /* ActivityViewModel.swift */,
 				591729AD27F553FC0080303E /* ActivityGroupViewModel.swift */,
+				591729C627F6D3820080303E /* ActivitySettingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -422,8 +429,8 @@
 		591729A527F4C6AB0080303E /* CellView */ = {
 			isa = PBXGroup;
 			children = (
-				591729A127F4BC9A0080303E /* ActivityCell.swift */,
-				591729A227F4BC9A0080303E /* ActivityCell.xib */,
+				591729BF27F6CEA50080303E /* SettingCell */,
+				591729BE27F6CE9A0080303E /* ActivityCell */,
 			);
 			path = CellView;
 			sourceTree = "<group>";
@@ -455,6 +462,24 @@
 				591729B827F613F30080303E /* SettingScreenController.xib */,
 			);
 			path = SettingScreen;
+			sourceTree = "<group>";
+		};
+		591729BE27F6CE9A0080303E /* ActivityCell */ = {
+			isa = PBXGroup;
+			children = (
+				591729A127F4BC9A0080303E /* ActivityCell.swift */,
+				591729A227F4BC9A0080303E /* ActivityCell.xib */,
+			);
+			path = ActivityCell;
+			sourceTree = "<group>";
+		};
+		591729BF27F6CEA50080303E /* SettingCell */ = {
+			isa = PBXGroup;
+			children = (
+				591729C027F6CF0C0080303E /* SettingActivityCell.swift */,
+				591729C127F6CF0C0080303E /* SettingActivityCell.xib */,
+			);
+			path = SettingCell;
 			sourceTree = "<group>";
 		};
 		8835D15906CCBAA1FC34AE46 /* Pods */ = {
@@ -600,6 +625,7 @@
 				5917292B27F49EE50080303E /* Fastfile in Resources */,
 				591729A427F4BC9A0080303E /* ActivityCell.xib in Resources */,
 				5917298527F4A0720080303E /* HomeScreenController.xib in Resources */,
+				591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +790,7 @@
 			files = (
 				591729B227F5E1050080303E /* DetailScreenViewController.swift in Sources */,
 				591729BC27F614130080303E /* SettingScreenViewModel.swift in Sources */,
+				591729C727F6D3820080303E /* ActivitySettingViewModel.swift in Sources */,
 				5917298627F4A0720080303E /* HomeScreenViewModel.swift in Sources */,
 				5917298927F4A0720080303E /* BaseViewModel.swift in Sources */,
 				5917297827F4A0720080303E /* Typealiases.swift in Sources */,
@@ -776,6 +803,7 @@
 				5917299127F4A0720080303E /* BoredNetworkManager.swift in Sources */,
 				591729A927F4C7120080303E /* ActivityHeaderCellView.swift in Sources */,
 				591729B527F5E1360080303E /* DetailScreenViewModel.swift in Sources */,
+				591729C227F6CF0C0080303E /* SettingActivityCell.swift in Sources */,
 				591728F627F4957E0080303E /* AppDelegate.swift in Sources */,
 				5917299927F4A0720080303E /* Constants.swift in Sources */,
 				591728F827F4957E0080303E /* SceneDelegate.swift in Sources */,
