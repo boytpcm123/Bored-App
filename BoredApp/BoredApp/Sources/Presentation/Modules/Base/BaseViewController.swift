@@ -18,12 +18,11 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateNightMode()
+        self.setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,11 +44,21 @@ extension BaseViewController {
     // override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     func updateNightMode() {
-        overrideUserInterfaceStyle = viewModel.getNightModeSetting() ? .dark : .light
+        guard let sceneDelegate = UIApplication.shared
+                .connectedScenes.first?.delegate as? SceneDelegate else { return }
+        sceneDelegate.overrideApplicationThemeStyle(isDarkMode: viewModel.getNightModeSetting())
     }
 }
 
 // MARK: - SUPPORT FUCTIONS
 extension BaseViewController {
     
+    fileprivate func setupUI() {
+        updateNightMode()
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.tintColor = .gray
+        
+        self.navigationController?.navigationBar .setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
 }

@@ -124,8 +124,10 @@ extension SettingScreenController {
     fileprivate func bindNightModeSwitch() {
         nightModeSwitch.rx.value
             .changed.subscribe(onNext: { [weak self] value in
-                self?.viewModel.updateNightMode(withState: value)
-                self?.updateNightMode()
+                guard let self = self else { return }
+                
+                self.viewModel.saveNightModeValue(withState: value)
+                self.updateNightMode()
             })
             .disposed(by: disposeBag)
     }
@@ -134,9 +136,11 @@ extension SettingScreenController {
         sliderActivities.rx.value
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] value in
+                guard let self = self else { return }
+                
                 let roundValue = round(value)
-                self?.numActivitiesLbl.text = "\(Int(roundValue))"
-                self?.sliderActivities.value = roundValue
+                self.numActivitiesLbl.text = "\(Int(roundValue))"
+                self.sliderActivities.value = roundValue
             })
             .disposed(by: disposeBag)
     }
@@ -154,6 +158,7 @@ extension SettingScreenController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
+                
                 self.viewModel.saveAllSetting(nightModeState: self.nightModeSwitch.isOn,
                                               selectAllState: self.selectAllTypeSwitch.isOn,
                                               numberActivities: self.sliderActivities.value,
@@ -171,9 +176,8 @@ extension SettingScreenController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.dismiss(animated: true) {
-                    self.onApplySaveSetting(false)
-                }
+                
+                self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }

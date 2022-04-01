@@ -19,6 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+// MARK: - PUBLIC FUCTIONS
+extension SceneDelegate {
+    
+    func overrideApplicationThemeStyle(isDarkMode: Bool) {
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+        }
+    }
+}
+
 // MARK: - SUPPORT FUCTIONS
 extension SceneDelegate {
     

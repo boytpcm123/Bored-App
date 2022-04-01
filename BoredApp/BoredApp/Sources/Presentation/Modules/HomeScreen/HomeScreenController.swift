@@ -88,7 +88,7 @@ extension HomeScreenController {
             .catchAndReturn([])
             .subscribe(onNext: { [weak self] listActivityGroup in
                 guard let self = self else { return }
-                 
+                
                 self.listActivityGroup = listActivityGroup
                 self.tableView.reloadData()
                 self.tableView.alpha = self.listActivityGroup.isEmpty ? 0 : 1
@@ -106,13 +106,12 @@ extension HomeScreenController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                 
+                
                 let controller = SettingScreenController.instantiate { settingChanged in
-                    if settingChanged {
-                        self.tableView.alpha = 1
-                        self.viewModel.fetchActivities()
-                    }
-                    self.updateNightMode()
+                    guard settingChanged else { return }
+                    
+                    self.tableView.alpha = 1
+                    self.viewModel.fetchActivities()
                 }
                 
                 let navVC: UINavigationController = UINavigationController(rootViewController: controller)

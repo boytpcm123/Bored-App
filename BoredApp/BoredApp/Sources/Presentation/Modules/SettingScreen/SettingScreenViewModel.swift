@@ -69,7 +69,7 @@ extension SettingScreenViewModel {
         publishListSettingType.onNext(listSettingType)
     }
     
-    func updateNightMode(withState state: Bool) {
+    func saveNightModeValue(withState state: Bool) {
         userDefaults.setBool(key: Constants.nightMode, value: state)
     }
     
