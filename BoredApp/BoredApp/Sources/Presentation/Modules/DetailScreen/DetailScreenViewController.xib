@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lcQ-6n-b4n">
-                    <rect key="frame" x="16" y="163" width="343" height="341.5"/>
+                    <rect key="frame" x="16" y="148" width="343" height="371.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKY-Xi-80U">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -110,7 +110,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="F5r-GY-vpi">
-                            <rect key="frame" x="0.0" y="297.5" width="343" height="44"/>
+                            <rect key="frame" x="0.0" y="297.5" width="343" height="74"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O72-9F-lU9">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="16"/>
@@ -119,16 +119,16 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FhU-BX-6di">
-                                    <rect key="frame" x="0.0" y="24" width="343" height="20"/>
+                                    <rect key="frame" x="0.0" y="24" width="343" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://www.google.com/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DK-94-wed">
-                                            <rect key="frame" x="0.0" y="0.0" width="160.5" height="20"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="160.5" height="50"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" systemColor="linkColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fd-nG-DOz">
-                                            <rect key="frame" x="0.0" y="0.0" width="160.5" height="20"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="160.5" height="50"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         </button>
                                     </subviews>
@@ -138,8 +138,8 @@
                                         <constraint firstAttribute="bottom" secondItem="4DK-94-wed" secondAttribute="bottom" id="K8X-jZ-iBa"/>
                                         <constraint firstItem="4DK-94-wed" firstAttribute="leading" secondItem="FhU-BX-6di" secondAttribute="leading" id="THf-Qt-xnn"/>
                                         <constraint firstItem="6fd-nG-DOz" firstAttribute="leading" secondItem="FhU-BX-6di" secondAttribute="leading" id="d8d-Qo-7JG"/>
+                                        <constraint firstAttribute="height" secondItem="4DK-94-wed" secondAttribute="height" id="fqW-gQ-SzF"/>
                                         <constraint firstItem="6fd-nG-DOz" firstAttribute="width" secondItem="4DK-94-wed" secondAttribute="width" id="hFL-g4-lXz"/>
-                                        <constraint firstAttribute="height" constant="20" id="hnw-pt-yoy"/>
                                         <constraint firstItem="4DK-94-wed" firstAttribute="top" secondItem="FhU-BX-6di" secondAttribute="top" id="nxJ-Zw-F09"/>
                                         <constraint firstItem="6fd-nG-DOz" firstAttribute="top" secondItem="FhU-BX-6di" secondAttribute="top" id="oqA-SH-jro"/>
                                     </constraints>
