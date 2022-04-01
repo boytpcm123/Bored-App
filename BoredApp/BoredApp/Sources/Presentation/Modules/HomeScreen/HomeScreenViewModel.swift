@@ -52,9 +52,11 @@ extension HomeScreenViewModel {
         let dispatchQueue = DispatchQueue(label: labelQueue, attributes: .concurrent)
         let dispatchSemaphore = DispatchSemaphore(value: 1)
         
+        var listActivityGroup: [ActivityGroupViewModel] = []
         let maxActivities: Int = getSettingNumActivities()
         let listActivityType: [ActivityType] = getActivityType()
-        var listActivityGroup: [ActivityGroupViewModel] = []
+        
+        self.showLoading.onNext(!listActivityType.isEmpty)
         
         for activityType in listActivityType {
             dispatchGroup.enter()

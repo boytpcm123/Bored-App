@@ -14,6 +14,7 @@ struct SettingScreenViewModel {
     private let userDefaults: UserDefaultManagering
     let publishListSettingType = BehaviorSubject<[ActivitySettingViewModel]>(value: [])
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
+    let publishIsSettingChanged = BehaviorSubject<Bool>(value: false)
     
     init(userDefaults: UserDefaultManagering = UserDefaultManager()) {
         self.userDefaults = userDefaults
@@ -59,14 +60,12 @@ extension SettingScreenViewModel {
         publishListSettingType.onNext(newListSettingType)
         
         // Bind UISwitch select all value
-        if newStateSelect == false { publishIsSelectAll.onNext(false) }
+        checkUpdateSelectAllSwift(state: newStateSelect, withData: newListSettingType)
     }
     
     func updateSelectAllActivityType(_ value: Bool) {
-        guard value else { return }
-        
         let listSettingType: [ActivitySettingViewModel] = ActivityType.allCases
-            .map { ActivitySettingViewModel(activityType: $0) }
+            .map { ActivitySettingViewModel(activityType: $0, isSelected: value) }
         publishListSettingType.onNext(listSettingType)
     }
     
@@ -76,8 +75,16 @@ extension SettingScreenViewModel {
                         listSettingType: [ActivitySettingViewModel]) {
         self.updateNightMode(withState: nightModeState)
         self.updateSelectAllActivities(withState: selectAllState)
-        self.updateNumberActivites(withNumber: Int(numberActivities))
-        self.updateListSettingType(withData: listSettingType)
+        
+        if listSettingType != getListActivitySetting() {
+            publishIsSettingChanged.onNext(true)
+            self.updateListSettingType(withData: listSettingType)
+        }
+        
+        if numberActivities != getNumberActivities() {
+            publishIsSettingChanged.onNext(true)
+            self.updateNumberActivites(withNumber: Int(numberActivities))
+        }
     }
 }
 
@@ -85,8 +92,12 @@ extension SettingScreenViewModel {
 extension SettingScreenViewModel {
     
     fileprivate func loadSettingValues() {
-        let listSettingType = userDefaults.getListActivitySetting()
+        let listSettingType = getListActivitySetting()
         publishListSettingType.onNext(listSettingType)
+    }
+    
+    fileprivate func getListActivitySetting() -> [ActivitySettingViewModel] {
+        return userDefaults.getListActivitySetting()
     }
     
     fileprivate func updateNightMode(withState state: Bool) {
@@ -103,5 +114,17 @@ extension SettingScreenViewModel {
     
     fileprivate func updateListSettingType(withData listSettingType: [ActivitySettingViewModel]) {
         userDefaults.setListActivitySetting(value: listSettingType)
+    }
+    
+    fileprivate func checkUpdateSelectAllSwift(state: Bool,
+                                               withData listSettingType: [ActivitySettingViewModel]) {
+        if state {
+            let numNoneSelectType = listSettingType.filter { !$0.getStateSelected() }.count
+            if numNoneSelectType == 0 {
+                publishIsSelectAll.onNext(true)
+            }
+        } else {
+            publishIsSelectAll.onNext(false)
+        }
     }
 }

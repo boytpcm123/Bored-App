@@ -11,9 +11,10 @@ import RxCocoa
 
 class SettingScreenController: BaseViewController {
     
-    static func instantiate() -> BaseViewController {
+    static func instantiate(onApplySaveSetting: @escaping ((_ settingChanged: Bool) -> Void)) -> BaseViewController {
         let controller = SettingScreenController()
         controller.viewModel = SettingScreenViewModel()
+        controller.onApplySaveSetting = onApplySaveSetting
         return controller
     }
     
@@ -41,8 +42,10 @@ class SettingScreenController: BaseViewController {
     
     // MARK: - PROPERTIES
     private var viewModel: SettingScreenViewModel!
+    private var onApplySaveSetting:((_ settingChanged: Bool) -> Void)!
     private let disposeBag = DisposeBag()
     private var listSettingType: [ActivitySettingViewModel] = []
+    private var isSettingChanged: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +72,12 @@ extension SettingScreenController {
     }
     
     fileprivate func bindData() {
+        
+        viewModel.publishIsSettingChanged
+            .subscribe(onNext: {
+                self.isSettingChanged = $0
+            })
+            .disposed(by: disposeBag)
         
         viewModel.publishIsSelectAll
             .bind(to: selectAllTypeSwitch.rx.value)
@@ -122,6 +131,7 @@ extension SettingScreenController {
     
     fileprivate func bindSliderActivities() {
         sliderActivities.rx.value
+            .distinctUntilChanged()
             .subscribe(onNext: { value in
                 let roundValue = round(value)
                 self.numActivitiesLbl.text = "\(Int(roundValue))"
@@ -149,6 +159,9 @@ extension SettingScreenController {
                                               listSettingType: self.listSettingType)
                 
                 self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true) {
+                    self.onApplySaveSetting(self.isSettingChanged)
+                }
             })
             .disposed(by: disposeBag)
     }

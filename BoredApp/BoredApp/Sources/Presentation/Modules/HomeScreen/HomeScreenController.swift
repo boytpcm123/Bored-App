@@ -30,6 +30,7 @@ class HomeScreenController: BaseViewController {
         }
     }
     @IBOutlet private weak var settingBtn: UIButton!
+    @IBOutlet private weak var emptyTextLbl: UILabel!
     
     // MARK: - PROPERTIES
     private var viewModel: HomeScreenViewModel!
@@ -58,6 +59,7 @@ extension HomeScreenController {
     fileprivate func setupUI() {
         
         self.title = viewModel.getTitleScreen()
+        self.emptyTextLbl.text = "Oop! You don't like any activity, right? :((\nPlease try one more time !!!"
         
         tableView.refreshControl = refreshControl
     }
@@ -85,8 +87,11 @@ extension HomeScreenController {
         viewModel.publishListActivityGroup
             .catchAndReturn([])
             .subscribe(onNext: { [weak self] listActivityGroup in
-                self?.listActivityGroup = listActivityGroup
-                self?.tableView.reloadData()
+                guard let self = self else { return }
+                 
+                self.listActivityGroup = listActivityGroup
+                self.tableView.reloadData()
+                self.tableView.alpha = self.listActivityGroup.isEmpty ? 0 : 1
             })
             .disposed(by: disposeBag)
         
@@ -100,10 +105,18 @@ extension HomeScreenController {
         settingBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                let controller = SettingScreenController.instantiate()
+                guard let self = self else { return }
+                 
+                let controller = SettingScreenController.instantiate { settingChanged in
+                    if settingChanged {
+                        self.tableView.alpha = 1
+                        self.viewModel.fetchActivities()
+                    }
+                }
+                
                 let navVC: UINavigationController = UINavigationController(rootViewController: controller)
                 navVC.modalPresentationStyle = .automatic
-                self?.present(navVC, animated: true, completion: nil)
+                self.present(navVC, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }

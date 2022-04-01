@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ActivitySettingViewModel: Codable {
+struct ActivitySettingViewModel: Codable, Equatable {
     
     private let activityType: ActivityType
     private var isSelected: Bool

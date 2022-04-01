@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeScreenController" customModule="BoredApp" customModuleProvider="target">
             <connections>
+                <outlet property="emptyTextLbl" destination="SR3-la-f7g" id="hqr-sK-VP5"/>
                 <outlet property="settingBtn" destination="n0L-CO-pgq" id="Ret-z8-Ike"/>
                 <outlet property="tableView" destination="GUK-pw-f5U" id="EY2-AF-gWs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,6 +23,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SR3-la-f7g">
+                    <rect key="frame" x="16" y="448" width="382" height="0.0"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C0u-VC-rfJ">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
@@ -57,8 +64,12 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="n0L-CO-pgq" secondAttribute="bottom" constant="32" id="1w0-ub-mMO"/>
                 <constraint firstItem="C0u-VC-rfJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CBu-Nu-W9t"/>
+                <constraint firstItem="SR3-la-f7g" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eGH-y0-Hik"/>
                 <constraint firstAttribute="trailing" secondItem="C0u-VC-rfJ" secondAttribute="trailing" id="eq1-KM-xYG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SR3-la-f7g" secondAttribute="trailing" constant="16" id="ik7-Af-zXL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="n0L-CO-pgq" secondAttribute="trailing" constant="32" id="oWu-C9-M1u"/>
+                <constraint firstItem="SR3-la-f7g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="st1-oC-Bdd"/>
+                <constraint firstItem="SR3-la-f7g" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="t13-9o-Mtw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="C0u-VC-rfJ" secondAttribute="bottom" id="uQq-Jg-SK1"/>
                 <constraint firstItem="C0u-VC-rfJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="xIc-RJ-8BY"/>
             </constraints>
