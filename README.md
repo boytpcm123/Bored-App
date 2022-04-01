@@ -19,18 +19,17 @@ Implementing MVVM concept with RxSwift and using UserDefaults to store user's se
 
 * Home
 
-![Home-Light](Images/Home-Light.png)
-
-![Home-Light](Images/Home-Dark.png)
+<p><img src="https://github.com/boytpcm123/Bored-App/blob/main/Images/Home-Light.png" width="300">
+<img src="https://github.com/boytpcm123/Bored-App/blob/main/Images/Home-Dark.png" width="300"></p>
 
 * Setting
 
-![Setting-Light](Images/Setting-Light.png)
-
-![Setting-Dark](Images/Setting-Dark.png)
+<p><img src="https://github.com/boytpcm123/Bored-App/blob/main/Images/Setting-Light.png" width="300">
+<img src="https://github.com/boytpcm123/Bored-App/blob/main/Images/Setting-Dark.png" width="300"></p>
 
 * Detail
 
-![Detail-Light](Images/Detail-Light.png)
+<p><img src="https://github.com/boytpcm123/Bored-App/blob/main/Images/Detail-Light.png" width="300">
+<img src="https://github.com/boytpcm123/Bored-App/blob/main/Images/Detail-Dark.png" width="300"></p>
 
-![Detail-Dark](Images/Detail-Dark.png)
+
