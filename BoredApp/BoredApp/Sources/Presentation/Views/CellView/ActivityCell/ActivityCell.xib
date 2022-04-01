@@ -44,8 +44,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="RsB-Xo-a4P"/>
-                                    <constraint firstAttribute="width" priority="750" constant="120" id="YQG-4d-K69"/>
+                                    <constraint firstAttribute="width" constant="120" id="YQG-4d-K69"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="A6A-l1-V0N">
