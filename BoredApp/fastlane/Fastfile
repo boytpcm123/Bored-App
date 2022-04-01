@@ -16,6 +16,6 @@ platform :ios do
   desc "Test App"
   lane :tests do
     run_tests(scheme: SCHEME_APP_TEST)
-    run_tests(scheme: SCHEME_APP_UI_TEST)
+    #run_tests(scheme: SCHEME_APP_UI_TEST)
   end
 end
