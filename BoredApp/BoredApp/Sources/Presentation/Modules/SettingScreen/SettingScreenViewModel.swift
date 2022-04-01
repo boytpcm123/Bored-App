@@ -11,13 +11,18 @@ import RxSwift
 struct SettingScreenViewModel {
     
     // MARK: - PROPERTIES
+    private let userDefaults: UserDefaultManagering
     let publishListSettingType: BehaviorSubject<[ActivitySettingViewModel]>
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
     
-    init() {
+    init(userDefaults: UserDefaultManagering = UserDefaultManager()) {
+        self.userDefaults = userDefaults
+        
         let listSettingType: [ActivitySettingViewModel] = ActivityType.allCases
             .map { ActivitySettingViewModel(activityType: $0) }
         publishListSettingType = BehaviorSubject(value: listSettingType)
+        
+        self.loadSettingValues()
     }
 }
 
@@ -26,6 +31,21 @@ extension SettingScreenViewModel {
     
     func getTitleScreen() -> String {
         return "Setting"
+    }
+    
+    func getNightModeSetting() -> Bool {
+        let state = userDefaults.getBool(key: Constants.nightMode) ?? Constants.initNightMode
+        return state
+    }
+    
+    func getStateSelectAll() {
+        let state = userDefaults.getBool(key: Constants.selectAllActivities) ?? Constants.initSelectAllActivities
+        publishIsSelectAll.onNext(state)
+    }
+    
+    func getNumberActivities() -> Float {
+        let numberActivities = userDefaults.getInt(key: Constants.numberActivities) ?? Constants.initNumActivity
+        return Float(numberActivities)
     }
     
     func updateStateSelect(atIndex index: Int,
@@ -53,8 +73,32 @@ extension SettingScreenViewModel {
             .map { ActivitySettingViewModel(activityType: $0) }
         publishListSettingType.onNext(listSettingType)
     }
+    
+    func saveAllSetting(nightModeState: Bool,
+                        selectAllState: Bool,
+                        numberActivities: Float) {
+        self.updateNightMode(withState: nightModeState)
+        self.updateSelectAllActivities(withState: selectAllState)
+        self.updateNumberActivites(withNumber: Int(numberActivities))
+    }
 }
 
 // MARK: - PRIVATE FUNCTIONS
 extension SettingScreenViewModel {
+    
+    fileprivate func loadSettingValues() {
+        
+    }
+    
+    fileprivate func updateNightMode(withState state: Bool) {
+        userDefaults.setBool(key: Constants.nightMode, value: state)
+    }
+    
+    fileprivate func updateSelectAllActivities(withState state: Bool) {
+        userDefaults.setBool(key: Constants.selectAllActivities, value: state)
+    }
+    
+    fileprivate func updateNumberActivites(withNumber number: Int) {
+        userDefaults.setInt(key: Constants.numberActivities, value: number)
+    }
 }

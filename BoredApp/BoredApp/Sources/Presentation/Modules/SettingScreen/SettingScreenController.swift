@@ -62,6 +62,10 @@ extension SettingScreenController {
         self.isModalInPresentation = true
         
         self.title = viewModel.getTitleScreen()
+        
+        nightModeSwitch.rx.value.onNext(viewModel.getNightModeSetting())
+        sliderActivities.rx.value.onNext(viewModel.getNumberActivities())
+        viewModel.getStateSelectAll()
     }
     
     fileprivate func bindData() {
@@ -132,14 +136,18 @@ extension SettingScreenController {
                 self?.viewModel.updateSelectAllActivityType(value)
             })
             .disposed(by: disposeBag)
-        
     }
     
     fileprivate func bindCloseBtn() {
         applyChangeBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                self?.dismiss(animated: true, completion: nil)
+                guard let self = self else { return }
+                self.viewModel.saveAllSetting(nightModeState: self.nightModeSwitch.isOn,
+                                              selectAllState: self.selectAllTypeSwitch.isOn,
+                                              numberActivities: self.sliderActivities.value)
+                
+                self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }

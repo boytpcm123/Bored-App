@@ -11,6 +11,7 @@ import RxSwift
 struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
+    private let userDefaults: UserDefaultManagering
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
     private let labelQueue = "com.thong.BoredApp.queue"
@@ -18,8 +19,10 @@ struct HomeScreenViewModel {
     let publishListActivityGroup = PublishSubject<[ActivityGroupViewModel]>()
     let showLoading = BehaviorSubject<Bool>(value: true)
     
-    init(boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager()) {
+    init(boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
+         userDefaults: UserDefaultManagering = UserDefaultManager()) {
         self.boredNetworkManager = boredNetworkManager
+        self.userDefaults = userDefaults
     }
 }
 
@@ -45,6 +48,8 @@ extension HomeScreenViewModel {
     
     func fetchActivities() {
         
+        let maxActivities = getSettingNumActivities()
+        
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: labelQueue, attributes: .concurrent)
         let dispatchSemaphore = DispatchSemaphore(value: 1)
@@ -58,12 +63,12 @@ extension HomeScreenViewModel {
             
             dispatchQueue.async {
                 // print("Check calling ", activityType)
-                for index in 0..<Constants.limitActivity {
+                for index in 0..<maxActivities {
                     self.boredNetworkManager
                         .getActivity(withType: activityType)
                         .subscribe( onSuccess: {
                             setActivity.append($0)
-                            if setActivity.count == Constants.limitActivity {
+                            if setActivity.count == maxActivities {
                                 let activityGroupViewModel = self.convertSetList(activityType: activityType,
                                                                                  setActivity: setActivity)
                                 listActivityGroup.append(activityGroupViewModel)
@@ -72,7 +77,7 @@ extension HomeScreenViewModel {
                         }, onFailure: { error in
                             print("error ", error.localizedDescription, activityType)
                             // Check prevent error when some activity change type
-                            if index == Constants.limitActivity - 1 {
+                            if index == maxActivities - 1 {
                                 dispatchGroup.leave()
                             }
                         }, onDisposed: {
@@ -103,5 +108,10 @@ extension HomeScreenViewModel {
             activityType: activityType, listActivity: listActivity)
         let activityGroupViewModel = ActivityGroupViewModel(activityGroupModel: activityGroupModel)
         return activityGroupViewModel
+    }
+    
+    fileprivate func getSettingNumActivities() -> Int {
+        let numberActivities = userDefaults.getInt(key: Constants.numberActivities) ?? Constants.initNumActivity
+        return numberActivities
     }
 }

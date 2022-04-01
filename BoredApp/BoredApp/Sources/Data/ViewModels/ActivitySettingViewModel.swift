@@ -22,7 +22,7 @@ struct ActivitySettingViewModel {
 extension ActivitySettingViewModel {
     
     func getNameActivity() -> String {
-        return activityType.description
+        return activityType.description.capitalized
     }
     
     func getStateSelected() -> Bool {

@@ -46,6 +46,7 @@
 		591729C227F6CF0C0080303E /* SettingActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C027F6CF0C0080303E /* SettingActivityCell.swift */; };
 		591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729C127F6CF0C0080303E /* SettingActivityCell.xib */; };
 		591729C727F6D3820080303E /* ActivitySettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C627F6D3820080303E /* ActivitySettingViewModel.swift */; };
+		591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C827F6EB4B0080303E /* UserDefaultManager.swift */; };
 		6A2A965077F63BC498E6D570 /* Pods_BoredAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */; };
 		D4194D8C75197F08C7E5AC98 /* Pods_BoredApp_BoredAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386F0F88CF660DF94230F5F0 /* Pods_BoredApp_BoredAppUITests.framework */; };
 		DD5692487999A530D5D6BD1A /* Pods_BoredApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */; };
@@ -117,6 +118,7 @@
 		591729C027F6CF0C0080303E /* SettingActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingActivityCell.swift; sourceTree = "<group>"; };
 		591729C127F6CF0C0080303E /* SettingActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingActivityCell.xib; sourceTree = "<group>"; };
 		591729C627F6D3820080303E /* ActivitySettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingViewModel.swift; sourceTree = "<group>"; };
+		591729C827F6EB4B0080303E /* UserDefaultManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		876190E23234BC92FEB5AAD7 /* Pods-BoredApp-BoredAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoredApp-BoredAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BoredApp-BoredAppUITests/Pods-BoredApp-BoredAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -383,6 +385,7 @@
 		5917296027F4A0720080303E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				591729CA27F6EB570080303E /* UserDefault */,
 				5917296427F4A0720080303E /* NetworkAPI */,
 				5917296E27F4A0720080303E /* Models */,
 				5917299C27F4A1460080303E /* ViewModels */,
@@ -480,6 +483,14 @@
 				591729C127F6CF0C0080303E /* SettingActivityCell.xib */,
 			);
 			path = SettingCell;
+			sourceTree = "<group>";
+		};
+		591729CA27F6EB570080303E /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				591729C827F6EB4B0080303E /* UserDefaultManager.swift */,
+			);
+			path = UserDefault;
 			sourceTree = "<group>";
 		};
 		8835D15906CCBAA1FC34AE46 /* Pods */ = {
@@ -812,6 +823,7 @@
 				5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */,
 				591729AC27F553730080303E /* ActivityGroupModel.swift in Sources */,
 				5917298727F4A0720080303E /* HomeScreenController.swift in Sources */,
+				591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */,
 				5917297527F4A0720080303E /* UIView+Subviews.swift in Sources */,
 				5917297627F4A0720080303E /* UITableView+Extension.swift in Sources */,
 			);
