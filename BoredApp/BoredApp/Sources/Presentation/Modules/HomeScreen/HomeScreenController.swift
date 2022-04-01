@@ -112,6 +112,7 @@ extension HomeScreenController {
                         self.tableView.alpha = 1
                         self.viewModel.fetchActivities()
                     }
+                    self.updateNightMode()
                 }
                 
                 let navVC: UINavigationController = UINavigationController(rootViewController: controller)

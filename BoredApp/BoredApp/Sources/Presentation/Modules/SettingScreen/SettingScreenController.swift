@@ -123,8 +123,9 @@ extension SettingScreenController {
     
     fileprivate func bindNightModeSwitch() {
         nightModeSwitch.rx.value
-            .changed.subscribe(onNext: { value in
-                print("night mode ", value ? "true" : "false")
+            .changed.subscribe(onNext: { [weak self] value in
+                self?.viewModel.updateNightMode(withState: value)
+                self?.updateNightMode()
             })
             .disposed(by: disposeBag)
     }
@@ -132,10 +133,10 @@ extension SettingScreenController {
     fileprivate func bindSliderActivities() {
         sliderActivities.rx.value
             .distinctUntilChanged()
-            .subscribe(onNext: { value in
+            .subscribe(onNext: { [weak self] value in
                 let roundValue = round(value)
-                self.numActivitiesLbl.text = "\(Int(roundValue))"
-                self.sliderActivities.value = roundValue
+                self?.numActivitiesLbl.text = "\(Int(roundValue))"
+                self?.sliderActivities.value = roundValue
             })
             .disposed(by: disposeBag)
     }
@@ -158,7 +159,6 @@ extension SettingScreenController {
                                               numberActivities: self.sliderActivities.value,
                                               listSettingType: self.listSettingType)
                 
-                self.dismiss(animated: true, completion: nil)
                 self.dismiss(animated: true) {
                     self.onApplySaveSetting(self.isSettingChanged)
                 }
@@ -170,7 +170,10 @@ extension SettingScreenController {
         closeSettingBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                self?.dismiss(animated: true, completion: nil)
+                guard let self = self else { return }
+                self.dismiss(animated: true) {
+                    self.onApplySaveSetting(false)
+                }
             })
             .disposed(by: disposeBag)
     }

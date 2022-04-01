@@ -132,7 +132,7 @@
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="6fd-nG-DOz" secondAttribute="bottom" id="FIL-Fi-hQg"/>
                                         <constraint firstAttribute="bottom" secondItem="4DK-94-wed" secondAttribute="bottom" id="K8X-jZ-iBa"/>
@@ -150,7 +150,7 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" systemColor="systemGray6Color"/>
             <constraints>
                 <constraint firstItem="lcQ-6n-b4n" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="NaS-uE-nJc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lcQ-6n-b4n" secondAttribute="trailing" constant="16" id="gxn-SS-kyn"/>
@@ -164,8 +164,8 @@
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

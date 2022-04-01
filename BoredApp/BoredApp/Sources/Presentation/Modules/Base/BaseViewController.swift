@@ -12,10 +12,18 @@ class BaseViewController: UIViewController {
     // MARK: - OUTLET
     
     // MARK: - PROPERTIES
+    private var viewModel: BaseViewModel = BaseViewModel()
     
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateNightMode()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +43,10 @@ extension BaseViewController: UIGestureRecognizerDelegate {
 // MARK: - CONFIG
 extension BaseViewController {
     // override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+    
+    func updateNightMode() {
+        overrideUserInterfaceStyle = viewModel.getNightModeSetting() ? .dark : .light
+    }
 }
 
 // MARK: - SUPPORT FUCTIONS

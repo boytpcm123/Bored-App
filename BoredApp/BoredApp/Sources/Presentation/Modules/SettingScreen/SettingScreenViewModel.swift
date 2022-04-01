@@ -69,21 +69,25 @@ extension SettingScreenViewModel {
         publishListSettingType.onNext(listSettingType)
     }
     
+    func updateNightMode(withState state: Bool) {
+        userDefaults.setBool(key: Constants.nightMode, value: state)
+    }
+    
     func saveAllSetting(nightModeState: Bool,
                         selectAllState: Bool,
                         numberActivities: Float,
                         listSettingType: [ActivitySettingViewModel]) {
-        self.updateNightMode(withState: nightModeState)
+        
         self.updateSelectAllActivities(withState: selectAllState)
         
         if listSettingType != getListActivitySetting() {
             publishIsSettingChanged.onNext(true)
-            self.updateListSettingType(withData: listSettingType)
+            updateListSettingType(withData: listSettingType)
         }
         
         if numberActivities != getNumberActivities() {
             publishIsSettingChanged.onNext(true)
-            self.updateNumberActivites(withNumber: Int(numberActivities))
+            updateNumberActivites(withNumber: Int(numberActivities))
         }
     }
 }
@@ -98,10 +102,6 @@ extension SettingScreenViewModel {
     
     fileprivate func getListActivitySetting() -> [ActivitySettingViewModel] {
         return userDefaults.getListActivitySetting()
-    }
-    
-    fileprivate func updateNightMode(withState state: Bool) {
-        userDefaults.setBool(key: Constants.nightMode, value: state)
     }
     
     fileprivate func updateSelectAllActivities(withState state: Bool) {
