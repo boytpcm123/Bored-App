@@ -18,7 +18,7 @@ struct BoredNetworkManager: BoredNetworkManagerProtocol {
     
     init() {
         let plugin: PluginType = NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))
-        provider = MoyaProvider<BoredService>(plugins: [])
+        provider = MoyaProvider<BoredService>(plugins: [plugin])
     }
 }
 

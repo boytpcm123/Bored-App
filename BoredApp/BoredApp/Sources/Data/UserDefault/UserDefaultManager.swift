@@ -8,19 +8,17 @@
 import Foundation
 
 protocol UserDefaultManagering {
-    func getString(key: String) -> String
-    func setString(key: String, value: String)
+    func getNightModeSetting() -> Bool
+    func setNightModeSetting(value: Bool)
     
-    func getBool(key: String) -> Bool?
-    func setBool(key: String, value: Bool)
+    func getSelectAllActivitiesSetting() -> Bool
+    func setSelectAllActivitiesSetting(value: Bool)
     
-    func getInt(key: String) -> Int?
-    func setInt(key: String, value: Int)
+    func getNumberActivitiesSetting() -> Int
+    func setNumberActivitiesSetting(value: Int)
     
     func getListActivitySetting() -> [ActivitySettingViewModel]
     func setListActivitySetting(value: [ActivitySettingViewModel])
-    
-    func remove(key: String)
 }
 
 struct UserDefaultManager: UserDefaultManagering {
@@ -35,34 +33,28 @@ struct UserDefaultManager: UserDefaultManagering {
 // MARK: - PUBLIC FUNCTIONS
 extension UserDefaultManager {
     
-    func getString(key: String) -> String {
-        userDefaults.string(forKey: key) ?? ""
+    func getNightModeSetting() -> Bool {
+        return self.getBool(key: Constants.nightMode) ?? Constants.initNightMode
     }
     
-    func setString(key: String, value: String) {
-        userDefaults.set(value, forKey: key)
+    func setNightModeSetting(value: Bool) {
+        self.setBool(key: Constants.nightMode, value: value)
     }
     
-    func getBool(key: String) -> Bool? {
-        if let value = userDefaults.value(forKey: key) {
-            return value as? Bool
-        }
-        return nil
+    func getSelectAllActivitiesSetting() -> Bool {
+        return self.getBool(key: Constants.selectAllActivities) ?? Constants.initSelectAllActivities
     }
     
-    func setBool(key: String, value: Bool) {
-        userDefaults.set(value, forKey: key)
+    func setSelectAllActivitiesSetting(value: Bool) {
+        self.setBool(key: Constants.selectAllActivities, value: value)
     }
     
-    func getInt(key: String) -> Int? {
-        if let value = userDefaults.value(forKey: key) {
-            return value as? Int
-        }
-        return nil
+    func getNumberActivitiesSetting() -> Int {
+        return self.getInt(key: Constants.numberActivities) ?? Constants.initNumActivities
     }
     
-    func setInt(key: String, value: Int) {
-        userDefaults.set(value, forKey: key)
+    func setNumberActivitiesSetting(value: Int) {
+        self.setInt(key: Constants.numberActivities, value: value)
     }
     
     func getListActivitySetting() -> [ActivitySettingViewModel] {
@@ -78,13 +70,40 @@ extension UserDefaultManager {
         self.setObject(value, forKey: Constants.listSettingType)
     }
     
-    func remove(key: String) {
-        userDefaults.removeObject(forKey: key)
-    }
 }
 
 // MARK: - SUPPORT FUNCTIONS
 extension UserDefaultManager {
+    
+    fileprivate func getString(key: String) -> String {
+        userDefaults.string(forKey: key) ?? ""
+    }
+    
+    fileprivate func setString(key: String, value: String) {
+        userDefaults.set(value, forKey: key)
+    }
+    
+    fileprivate func getBool(key: String) -> Bool? {
+        if let value = userDefaults.value(forKey: key) {
+            return value as? Bool
+        }
+        return nil
+    }
+    
+    fileprivate func setBool(key: String, value: Bool) {
+        userDefaults.set(value, forKey: key)
+    }
+    
+    fileprivate func getInt(key: String) -> Int? {
+        if let value = userDefaults.value(forKey: key) {
+            return value as? Int
+        }
+        return nil
+    }
+    
+    fileprivate func setInt(key: String, value: Int) {
+        userDefaults.set(value, forKey: key)
+    }
     
     fileprivate func setObject<Object>(_ object: Object, forKey: String) where Object: Encodable {
         let encoder = JSONEncoder()
@@ -107,5 +126,9 @@ extension UserDefaultManager {
             print("Failed to decode object:", error.localizedDescription)
             return nil
         }
+    }
+    
+    fileprivate func remove(key: String) {
+        userDefaults.removeObject(forKey: key)
     }
 }

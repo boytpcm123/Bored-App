@@ -20,8 +20,7 @@ struct BaseViewModel {
 extension BaseViewModel {
     
     func getNightModeSetting() -> Bool {
-        let state = userDefaults.getBool(key: Constants.nightMode) ?? Constants.initNightMode
-        return state
+        return userDefaults.getNightModeSetting()
     }
 }
 

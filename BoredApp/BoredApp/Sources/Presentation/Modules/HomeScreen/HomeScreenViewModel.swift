@@ -112,8 +112,7 @@ extension HomeScreenViewModel {
     }
     
     fileprivate func getSettingNumActivities() -> Int {
-        let numberActivities = userDefaults.getInt(key: Constants.numberActivities) ?? Constants.initNumActivity
-        return numberActivities
+        return userDefaults.getNumberActivitiesSetting()
     }
     
     fileprivate func getActivityType() -> [ActivityType] {
