@@ -11,6 +11,7 @@ enum Constants {
     static let nightMode: String = "NightModeKey"
     static let numberActivities: String = "NumberActivitiesKey"
     static let selectAllActivities: String = "SelectAllActivitiesKey"
-
+    static let listSettingType: String = "ListSettingTypeKey"
+    
     enum API {}
 }

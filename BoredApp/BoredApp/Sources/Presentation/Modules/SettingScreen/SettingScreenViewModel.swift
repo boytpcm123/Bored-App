@@ -12,16 +12,12 @@ struct SettingScreenViewModel {
     
     // MARK: - PROPERTIES
     private let userDefaults: UserDefaultManagering
-    let publishListSettingType: BehaviorSubject<[ActivitySettingViewModel]>
+    let publishListSettingType = BehaviorSubject<[ActivitySettingViewModel]>(value: [])
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
     
     init(userDefaults: UserDefaultManagering = UserDefaultManager()) {
         self.userDefaults = userDefaults
-        
-        let listSettingType: [ActivitySettingViewModel] = ActivityType.allCases
-            .map { ActivitySettingViewModel(activityType: $0) }
-        publishListSettingType = BehaviorSubject(value: listSettingType)
-        
+    
         self.loadSettingValues()
     }
 }
@@ -49,7 +45,7 @@ extension SettingScreenViewModel {
     }
     
     func updateStateSelect(atIndex index: Int,
-                           data listSettingType: [ActivitySettingViewModel]) {
+                           withData listSettingType: [ActivitySettingViewModel]) {
         
         var newListSettingType = listSettingType
         let activitySettingViewModel = listSettingType[index]
@@ -76,10 +72,12 @@ extension SettingScreenViewModel {
     
     func saveAllSetting(nightModeState: Bool,
                         selectAllState: Bool,
-                        numberActivities: Float) {
+                        numberActivities: Float,
+                        listSettingType: [ActivitySettingViewModel]) {
         self.updateNightMode(withState: nightModeState)
         self.updateSelectAllActivities(withState: selectAllState)
         self.updateNumberActivites(withNumber: Int(numberActivities))
+        self.updateListSettingType(withData: listSettingType)
     }
 }
 
@@ -87,7 +85,8 @@ extension SettingScreenViewModel {
 extension SettingScreenViewModel {
     
     fileprivate func loadSettingValues() {
-        
+        let listSettingType = userDefaults.getListActivitySetting()
+        publishListSettingType.onNext(listSettingType)
     }
     
     fileprivate func updateNightMode(withState state: Bool) {
@@ -100,5 +99,9 @@ extension SettingScreenViewModel {
     
     fileprivate func updateNumberActivites(withNumber number: Int) {
         userDefaults.setInt(key: Constants.numberActivities, value: number)
+    }
+    
+    fileprivate func updateListSettingType(withData listSettingType: [ActivitySettingViewModel]) {
+        userDefaults.setListActivitySetting(value: listSettingType)
     }
 }

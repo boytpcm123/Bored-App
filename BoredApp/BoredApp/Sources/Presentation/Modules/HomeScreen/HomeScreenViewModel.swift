@@ -48,13 +48,12 @@ extension HomeScreenViewModel {
     
     func fetchActivities() {
         
-        let maxActivities = getSettingNumActivities()
-        
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: labelQueue, attributes: .concurrent)
         let dispatchSemaphore = DispatchSemaphore(value: 1)
         
-        let listActivityType = ActivityType.allCases
+        let maxActivities: Int = getSettingNumActivities()
+        let listActivityType: [ActivityType] = getActivityType()
         var listActivityGroup: [ActivityGroupViewModel] = []
         
         for activityType in listActivityType {
@@ -113,5 +112,13 @@ extension HomeScreenViewModel {
     fileprivate func getSettingNumActivities() -> Int {
         let numberActivities = userDefaults.getInt(key: Constants.numberActivities) ?? Constants.initNumActivity
         return numberActivities
+    }
+    
+    fileprivate func getActivityType() -> [ActivityType] {
+        let listSettingType: [ActivitySettingViewModel] = userDefaults.getListActivitySetting()
+        let listActivityType: [ActivityType] = listSettingType
+            .filter { $0.getStateSelected() }
+            .map { $0.getActivityType() }
+        return listActivityType
     }
 }

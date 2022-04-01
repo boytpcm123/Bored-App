@@ -95,7 +95,7 @@ extension SettingScreenController {
             .bind { [weak self] _, indexPath in
                 guard let self = self else { return }
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                self.viewModel.updateStateSelect(atIndex: indexPath.row, data: self.listSettingType)
+                self.viewModel.updateStateSelect(atIndex: indexPath.row, withData: self.listSettingType)
             }
             .disposed(by: disposeBag)
     }
@@ -145,7 +145,8 @@ extension SettingScreenController {
                 guard let self = self else { return }
                 self.viewModel.saveAllSetting(nightModeState: self.nightModeSwitch.isOn,
                                               selectAllState: self.selectAllTypeSwitch.isOn,
-                                              numberActivities: self.sliderActivities.value)
+                                              numberActivities: self.sliderActivities.value,
+                                              listSettingType: self.listSettingType)
                 
                 self.dismiss(animated: true, completion: nil)
             })

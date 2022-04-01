@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ActivityType: String, Decodable, CaseIterable {
+enum ActivityType: String, Codable, CaseIterable {
     
     case education
     case recreational
