@@ -16,7 +16,7 @@ class UserDefaultManagerSpec: QuickSpec {
     
     override func spec() {
         
-        let userDefaults: UserDefaultManagering = UserDefaultManager()
+        let userDefaults: UserDefaultManagerProtocol = UserDefaultManager()
         
         describe("Test nightMode setting") {
             context("Save a state nightMode to userdefaults") {

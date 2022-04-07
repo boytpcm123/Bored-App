@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import RxSwift
-
 @testable import BoredApp
 
 enum MockData {
@@ -27,6 +25,14 @@ enum MockData {
         
         return JSONData
     }
+
+    static let activity = ActivityModel(activity: "Activity 1",
+                                        type: "Type 1",
+                                        participants: 1,
+                                        price: 1.0,
+                                        link: "Link 1",
+                                        key: "Key 1",
+                                        accessibility: 1.0)
     
     static var activityData: [ActivityModel] {
         let activity1 = ActivityModel(activity: "Activity 1",
@@ -61,25 +67,4 @@ enum MockData {
             ActivitySettingViewModel(activityType: $0)
         }
     }
-}
-
-struct MockBoredNetworkManager: BoredNetworkManagerProtocol {
-
-  let disposeBag = DisposeBag()
-
-  func getActivity(withType type: ActivityType) -> Single<ActivityModel> {
-
-    let activity1 = ActivityModel(activity: "Activity 1",
-                                  type: "Type 1",
-                                  participants: 1,
-                                  price: 1.0,
-                                  link: "Link 1",
-                                  key: "Key 1",
-                                  accessibility: 1.0)
-
-    return Single.create { single in
-      single(.success(activity1))
-      return Disposables.create()
-    }
-  }
 }
