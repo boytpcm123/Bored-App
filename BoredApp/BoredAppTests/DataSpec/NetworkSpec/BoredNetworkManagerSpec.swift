@@ -15,7 +15,7 @@ import RxSwift
 class BoredNetworkManagerSpec: QuickSpec {
     
     override func spec() {
-        
+
         let boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager()
         let disposeBag = DisposeBag()
         
