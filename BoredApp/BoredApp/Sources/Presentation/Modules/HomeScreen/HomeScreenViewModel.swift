@@ -11,7 +11,7 @@ import RxSwift
 struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
-    private let userDefaults: UserDefaultManagering
+    private let userDefaults: UserDefaultManagerProtocol
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
     private let labelQueue = "com.thong.BoredApp.queue"
@@ -20,7 +20,7 @@ struct HomeScreenViewModel {
     let showLoading = BehaviorSubject<Bool>(value: true)
     
     init(boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
-         userDefaults: UserDefaultManagering = UserDefaultManager()) {
+         userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
         self.boredNetworkManager = boredNetworkManager
         self.userDefaults = userDefaults
     }

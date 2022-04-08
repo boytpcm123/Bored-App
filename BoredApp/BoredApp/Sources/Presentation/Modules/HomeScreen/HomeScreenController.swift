@@ -27,6 +27,9 @@ class HomeScreenController: BaseViewController {
             self.tableView.contentInsetAdjustmentBehavior = .never
             self.tableView.delegate = self
             self.tableView.dataSource = self
+            if #available(iOS 15.0, *) {
+                self.tableView.sectionHeaderTopPadding = 0
+            }
         }
     }
     @IBOutlet private weak var settingBtn: UIButton!
@@ -41,7 +44,7 @@ class HomeScreenController: BaseViewController {
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUI()
         bindSettingBtn()
         bindData()

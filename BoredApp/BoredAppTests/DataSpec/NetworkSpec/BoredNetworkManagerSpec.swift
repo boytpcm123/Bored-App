@@ -15,13 +15,15 @@ import RxSwift
 class BoredNetworkManagerSpec: QuickSpec {
     
     override func spec() {
-        
-        let boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager()
+
+        var boredNetworkManager: BoredNetworkManagerProtocol!
         let disposeBag = DisposeBag()
         
         describe("Get single activity") {
             context("and the network is established") {
-                beforeEach {}
+                beforeEach {
+                    boredNetworkManager = BoredNetworkManager()
+                }
                 it("should get the single ActivityModel") {
                     waitUntil { done in
                         boredNetworkManager

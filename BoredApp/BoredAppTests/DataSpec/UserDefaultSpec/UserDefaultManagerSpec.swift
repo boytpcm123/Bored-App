@@ -13,49 +13,46 @@ import Nimble
 @testable import BoredApp
 
 class UserDefaultManagerSpec: QuickSpec {
-    
+
     override func spec() {
-        
-        let userDefaults: UserDefaultManagering = UserDefaultManager()
+
+        var userDefaults: UserDefaultManagerProtocol!
         
         describe("Test nightMode setting") {
             context("Save a state nightMode to userdefaults") {
-                
-                let isNightMode = true
+
                 beforeEach {
-                    userDefaults.setNightModeSetting(value: isNightMode)
+                    userDefaults = MockUserDefaultManager()
                 }
                 it("should get status equal isNightMode") {
                     let status = userDefaults.getNightModeSetting()
-                    expect(status).to(beTrue())
+                    expect(status) == true
                 }
             }
         }
         
         describe("Test selectAll activity type setting") {
             context("Save a state selectAll to userdefaults") {
-                
-                let isSelectAll = true
+
                 beforeEach {
-                    userDefaults.setSelectAllActivitiesSetting(value: isSelectAll)
+                    userDefaults = MockUserDefaultManager()
                 }
                 it("should get status equal isSelectAll") {
                     let status = userDefaults.getSelectAllActivitiesSetting()
-                    expect(status).to(beTrue())
+                    expect(status) == false
                 }
             }
         }
         
         describe("Test get number request activity setting") {
             context("Save a numRequest to userdefaults") {
-                
-                let numRequest = 6
+
                 beforeEach {
-                    userDefaults.setNumberActivitiesSetting(value: numRequest)
+                    userDefaults = MockUserDefaultManager()
                 }
                 it("should get value equal numRequest") {
                     let numRequestActivity = userDefaults.getNumberActivitiesSetting()
-                    expect(numRequestActivity).to(equal(6))
+                    expect(numRequestActivity) == 1
                 }
             }
         }
@@ -64,12 +61,12 @@ class UserDefaultManagerSpec: QuickSpec {
             context("Save a list activity type to userdefaults") {
                 
                 beforeEach {
-                    userDefaults.setListActivitySetting(value: MockData.activityTypeSettingDate)
+                    userDefaults = MockUserDefaultManager()
                 }
                 it("should get list equal isSelectAll") {
                     let listActivityType = userDefaults.getListActivitySetting()
                     expect(listActivityType).to(beAKindOf([ActivitySettingViewModel].self))
-                    expect(listActivityType.isEmpty).to(beFalse())
+                    expect(listActivityType.isEmpty) == true
                 }
             }
         }

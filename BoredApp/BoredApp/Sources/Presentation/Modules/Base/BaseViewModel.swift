@@ -9,9 +9,9 @@ import UIKit
 
 struct BaseViewModel {
     
-    private let userDefaults: UserDefaultManagering
+    private let userDefaults: UserDefaultManagerProtocol
     
-    init(userDefaults: UserDefaultManagering = UserDefaultManager()) {
+    init(userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
         self.userDefaults = userDefaults
     }
 }

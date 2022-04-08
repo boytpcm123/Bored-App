@@ -49,6 +49,9 @@
 		595B987927F75F1400B085BE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B987827F75F1400B085BE /* MockData.swift */; };
 		595B987E27F7688100B085BE /* BoredNetworkManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B987D27F7688100B085BE /* BoredNetworkManagerSpec.swift */; };
 		595B988127F76EF900B085BE /* UserDefaultManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */; };
+		599FA66627FEDC3900C43BE6 /* HomeScreenViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599FA66527FEDC3900C43BE6 /* HomeScreenViewModelSpec.swift */; };
+		599FA66827FEDED100C43BE6 /* MockBoredNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599FA66727FEDED100C43BE6 /* MockBoredNetworkManager.swift */; };
+		599FA66A27FEDF2B00C43BE6 /* MockUserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599FA66927FEDF2B00C43BE6 /* MockUserDefaultManager.swift */; };
 		6A2A965077F63BC498E6D570 /* Pods_BoredAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */; };
 		D4194D8C75197F08C7E5AC98 /* Pods_BoredApp_BoredAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 386F0F88CF660DF94230F5F0 /* Pods_BoredApp_BoredAppUITests.framework */; };
 		DD5692487999A530D5D6BD1A /* Pods_BoredApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */; };
@@ -123,6 +126,9 @@
 		595B987827F75F1400B085BE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		595B987D27F7688100B085BE /* BoredNetworkManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoredNetworkManagerSpec.swift; sourceTree = "<group>"; };
 		595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManagerSpec.swift; sourceTree = "<group>"; };
+		599FA66527FEDC3900C43BE6 /* HomeScreenViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModelSpec.swift; sourceTree = "<group>"; };
+		599FA66727FEDED100C43BE6 /* MockBoredNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBoredNetworkManager.swift; sourceTree = "<group>"; };
+		599FA66927FEDF2B00C43BE6 /* MockUserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultManager.swift; sourceTree = "<group>"; };
 		7E1B2DDF89C7DBCC3C5D7B8B /* Pods_BoredAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		876190E23234BC92FEB5AAD7 /* Pods-BoredApp-BoredAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoredApp-BoredAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BoredApp-BoredAppUITests/Pods-BoredApp-BoredAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA726C3467E148BA7485E1DD /* Pods_BoredApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BoredApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,6 +516,8 @@
 			isa = PBXGroup;
 			children = (
 				595B987827F75F1400B085BE /* MockData.swift */,
+				599FA66727FEDED100C43BE6 /* MockBoredNetworkManager.swift */,
+				599FA66927FEDF2B00C43BE6 /* MockUserDefaultManager.swift */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -519,6 +527,7 @@
 			children = (
 				595B987F27F76EDB00B085BE /* UserDefaultSpec */,
 				595B987B27F7681C00B085BE /* NetworkSpec */,
+				599FA66427FEDC2300C43BE6 /* ViewModelSpec */,
 			);
 			path = DataSpec;
 			sourceTree = "<group>";
@@ -537,6 +546,14 @@
 				595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */,
 			);
 			path = UserDefaultSpec;
+			sourceTree = "<group>";
+		};
+		599FA66427FEDC2300C43BE6 /* ViewModelSpec */ = {
+			isa = PBXGroup;
+			children = (
+				599FA66527FEDC3900C43BE6 /* HomeScreenViewModelSpec.swift */,
+			);
+			path = ViewModelSpec;
 			sourceTree = "<group>";
 		};
 		8835D15906CCBAA1FC34AE46 /* Pods */ = {
@@ -879,8 +896,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				599FA66627FEDC3900C43BE6 /* HomeScreenViewModelSpec.swift in Sources */,
 				595B987E27F7688100B085BE /* BoredNetworkManagerSpec.swift in Sources */,
+				599FA66827FEDED100C43BE6 /* MockBoredNetworkManager.swift in Sources */,
 				595B988127F76EF900B085BE /* UserDefaultManagerSpec.swift in Sources */,
+				599FA66A27FEDF2B00C43BE6 /* MockUserDefaultManager.swift in Sources */,
 				595B987927F75F1400B085BE /* MockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
