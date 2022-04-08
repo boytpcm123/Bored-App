@@ -11,12 +11,12 @@ import RxSwift
 struct SettingScreenViewModel {
     
     // MARK: - PROPERTIES
-    private let userDefaults: UserDefaultManagering
+    private let userDefaults: UserDefaultManagerProtocol
     let publishListSettingType = BehaviorSubject<[ActivitySettingViewModel]>(value: [])
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
     let publishIsSettingChanged = BehaviorSubject<Bool>(value: false)
     
-    init(userDefaults: UserDefaultManagering = UserDefaultManager()) {
+    init(userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
         self.userDefaults = userDefaults
     
         self.loadSettingValues()

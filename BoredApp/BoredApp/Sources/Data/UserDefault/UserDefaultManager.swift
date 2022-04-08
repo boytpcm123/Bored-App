@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserDefaultManagering {
+protocol UserDefaultManagerProtocol {
     func getNightModeSetting() -> Bool
     func setNightModeSetting(value: Bool)
     
@@ -21,7 +21,7 @@ protocol UserDefaultManagering {
     func setListActivitySetting(value: [ActivitySettingViewModel])
 }
 
-struct UserDefaultManager: UserDefaultManagering {
+struct UserDefaultManager: UserDefaultManagerProtocol {
     
     private var userDefaults: UserDefaults
     

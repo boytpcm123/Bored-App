@@ -47,7 +47,7 @@
                                 </switch>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="khl-S6-riM">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="khl-S6-riM">
                             <rect key="frame" x="0.0" y="46" width="382" height="82"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="w4s-ii-QDb">
@@ -71,12 +71,18 @@
                                     </subviews>
                                 </stackView>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="8" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-z0-hk4">
-                                    <rect key="frame" x="-2" y="46" width="386" height="37"/>
+                                    <rect key="frame" x="14" y="46" width="354" height="37"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="36" id="iqt-3g-37c"/>
                                     </constraints>
                                 </slider>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="w4s-ii-QDb" firstAttribute="leading" secondItem="khl-S6-riM" secondAttribute="leading" id="Fwd-nT-q3m"/>
+                                <constraint firstAttribute="trailing" secondItem="vt6-z0-hk4" secondAttribute="trailing" constant="16" id="P5k-Yx-4QG"/>
+                                <constraint firstAttribute="trailing" secondItem="w4s-ii-QDb" secondAttribute="trailing" id="Py2-Yk-Uvn"/>
+                                <constraint firstItem="vt6-z0-hk4" firstAttribute="leading" secondItem="khl-S6-riM" secondAttribute="leading" constant="16" id="UHR-SB-GNH"/>
+                            </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5jC-do-zBH">
                             <rect key="frame" x="0.0" y="144" width="382" height="586"/>
