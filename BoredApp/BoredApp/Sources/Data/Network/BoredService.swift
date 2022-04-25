@@ -15,12 +15,12 @@ enum BoredService {
 extension BoredService: TargetType {
     
     // swiftlint:disable:next force_unwrapping
-    var baseURL: URL { URL(string: "https://www.boredapi.com/api")! }
+    var baseURL: URL { URL(string: Constants.API.base)! }
     
     var path: String {
         switch self {
         case .getActivity:
-            return "/activity"
+            return Constants.API.activity
         }
     }
     

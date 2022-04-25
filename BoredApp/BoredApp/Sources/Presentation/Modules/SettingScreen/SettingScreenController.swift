@@ -159,8 +159,7 @@ extension SettingScreenController {
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 
-                self.viewModel.saveAllSetting(nightModeState: self.nightModeSwitch.isOn,
-                                              selectAllState: self.selectAllTypeSwitch.isOn,
+                self.viewModel.saveAllSetting(selectAllState: self.selectAllTypeSwitch.isOn,
                                               numberActivities: self.sliderActivities.value,
                                               listSettingType: self.listSettingType)
                 

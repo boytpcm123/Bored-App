@@ -34,31 +34,31 @@ struct UserDefaultManager: UserDefaultManagerProtocol {
 extension UserDefaultManager {
     
     func getNightModeSetting() -> Bool {
-        return self.getBool(key: Constants.nightMode) ?? Constants.initNightMode
+        return self.getBool(key: Constants.UserDefaultsKey.nightMode) ?? Constants.initNightMode
     }
     
     func setNightModeSetting(value: Bool) {
-        self.setBool(key: Constants.nightMode, value: value)
+        self.setBool(key: Constants.UserDefaultsKey.nightMode, value: value)
     }
     
     func getSelectAllActivitiesSetting() -> Bool {
-        return self.getBool(key: Constants.selectAllActivities) ?? Constants.initSelectAllActivities
+        return self.getBool(key: Constants.UserDefaultsKey.selectAllActivities) ?? Constants.initSelectAllActivities
     }
     
     func setSelectAllActivitiesSetting(value: Bool) {
-        self.setBool(key: Constants.selectAllActivities, value: value)
+        self.setBool(key: Constants.UserDefaultsKey.selectAllActivities, value: value)
     }
     
     func getNumberActivitiesSetting() -> Int {
-        return self.getInt(key: Constants.numberActivities) ?? Constants.initNumActivities
+        return self.getInt(key: Constants.UserDefaultsKey.numberActivities) ?? Constants.initNumActivities
     }
     
     func setNumberActivitiesSetting(value: Int) {
-        self.setInt(key: Constants.numberActivities, value: value)
+        self.setInt(key: Constants.UserDefaultsKey.numberActivities, value: value)
     }
     
     func getListActivitySetting() -> [ActivitySettingViewModel] {
-        if let listSettingType = getObject(forKey: Constants.listSettingType,
+        if let listSettingType = getObject(forKey: Constants.UserDefaultsKey.listSettingType,
                                            castTo: Array<ActivitySettingViewModel>.self) {
             return listSettingType
         }
@@ -67,7 +67,7 @@ extension UserDefaultManager {
     }
     
     func setListActivitySetting(value: [ActivitySettingViewModel]) {
-        self.setObject(value, forKey: Constants.listSettingType)
+        self.setObject(value, forKey: Constants.UserDefaultsKey.listSettingType)
     }
     
 }

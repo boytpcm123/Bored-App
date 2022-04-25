@@ -72,8 +72,7 @@ extension SettingScreenViewModel {
         userDefaults.setNightModeSetting(value: state)
     }
     
-    func saveAllSetting(nightModeState: Bool,
-                        selectAllState: Bool,
+    func saveAllSetting(selectAllState: Bool,
                         numberActivities: Float,
                         listSettingType: [ActivitySettingViewModel]) {
         

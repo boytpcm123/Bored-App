@@ -46,6 +46,8 @@
 		591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729C127F6CF0C0080303E /* SettingActivityCell.xib */; };
 		591729C727F6D3820080303E /* ActivitySettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C627F6D3820080303E /* ActivitySettingViewModel.swift */; };
 		591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C827F6EB4B0080303E /* UserDefaultManager.swift */; };
+		593E672228163A59003FAD22 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672128163A59003FAD22 /* UserDefaultsKey.swift */; };
+		593E672428163A78003FAD22 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672328163A78003FAD22 /* API.swift */; };
 		595B987927F75F1400B085BE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B987827F75F1400B085BE /* MockData.swift */; };
 		595B987E27F7688100B085BE /* BoredNetworkManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B987D27F7688100B085BE /* BoredNetworkManagerSpec.swift */; };
 		595B988127F76EF900B085BE /* UserDefaultManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */; };
@@ -123,6 +125,8 @@
 		591729C127F6CF0C0080303E /* SettingActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingActivityCell.xib; sourceTree = "<group>"; };
 		591729C627F6D3820080303E /* ActivitySettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingViewModel.swift; sourceTree = "<group>"; };
 		591729C827F6EB4B0080303E /* UserDefaultManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		593E672128163A59003FAD22 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		593E672328163A78003FAD22 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		595B987827F75F1400B085BE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		595B987D27F7688100B085BE /* BoredNetworkManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoredNetworkManagerSpec.swift; sourceTree = "<group>"; };
 		595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManagerSpec.swift; sourceTree = "<group>"; };
@@ -426,6 +430,8 @@
 			isa = PBXGroup;
 			children = (
 				5917297227F4A0720080303E /* Constants.swift */,
+				593E672128163A59003FAD22 /* UserDefaultsKey.swift */,
+				593E672328163A78003FAD22 /* API.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -876,6 +882,7 @@
 				591729B927F613F30080303E /* SettingScreenController.swift in Sources */,
 				5917299127F4A0720080303E /* BoredNetworkManager.swift in Sources */,
 				591729A927F4C7120080303E /* ActivityHeaderCellView.swift in Sources */,
+				593E672428163A78003FAD22 /* API.swift in Sources */,
 				591729B527F5E1360080303E /* DetailScreenViewModel.swift in Sources */,
 				591729C227F6CF0C0080303E /* SettingActivityCell.swift in Sources */,
 				591728F627F4957E0080303E /* AppDelegate.swift in Sources */,
@@ -886,6 +893,7 @@
 				5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */,
 				591729AC27F553730080303E /* ActivityGroupModel.swift in Sources */,
 				5917298727F4A0720080303E /* HomeScreenController.swift in Sources */,
+				593E672228163A59003FAD22 /* UserDefaultsKey.swift in Sources */,
 				591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */,
 				5917297527F4A0720080303E /* UIView+Subviews.swift in Sources */,
 				5917297627F4A0720080303E /* UITableView+Extension.swift in Sources */,

@@ -23,10 +23,6 @@ extension ActivityGroupViewModel {
         return activityGroupModel.activityType.description.capitalized
     }
     
-    func getListActivity() -> [ActivityModel] {
-        return activityGroupModel.listActivity
-    }
-    
     func getLengthListActivity() -> Int {
         return activityGroupModel.listActivity.count
     }
