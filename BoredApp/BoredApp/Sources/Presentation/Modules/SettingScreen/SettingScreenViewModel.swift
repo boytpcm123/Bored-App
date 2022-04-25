@@ -7,18 +7,23 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import XCoordinator
 
 struct SettingScreenViewModel {
     
     // MARK: - PROPERTIES
+    private let router: UnownedRouter<AppRoute>?
     private let userDefaults: UserDefaultManagerProtocol
-    let publishListSettingType = BehaviorSubject<[ActivitySettingViewModel]>(value: [])
+    
+    var dataList = BehaviorRelay(value: [ActivitySettingViewModel]())
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
     let publishIsSettingChanged = BehaviorSubject<Bool>(value: false)
     
-    init(userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
+    init(router: UnownedRouter<AppRoute>? = nil,
+         userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
+        self.router = router
         self.userDefaults = userDefaults
-    
         self.loadSettingValues()
     }
 }
@@ -44,20 +49,19 @@ extension SettingScreenViewModel {
         return Float(numberActivities)
     }
     
-    func updateStateSelect(atIndex index: Int,
-                           withData listSettingType: [ActivitySettingViewModel]) {
+    func updateStateSelect(atIndex index: Int) {
         
-        var newListSettingType = listSettingType
-        let activitySettingViewModel = listSettingType[index]
-        let newStateSelect = !activitySettingViewModel.getStateSelected()
+        var newListSettingType = dataList.value
+        let activitySetting = dataList.value[index]
+        let newStateSelect = !activitySetting.getStateSelected()
         
         let newStateViewModel = ActivitySettingViewModel(
-            activityType: activitySettingViewModel.getActivityType(),
+            activityType: activitySetting.getActivityType(),
             isSelected: newStateSelect)
         newListSettingType[index] = newStateViewModel
-        
-        publishListSettingType.onNext(newListSettingType)
-        
+
+        dataList.accept(newListSettingType)
+
         // Bind UISwitch select all value
         checkUpdateSelectAllSwift(state: newStateSelect, withData: newListSettingType)
     }
@@ -65,23 +69,21 @@ extension SettingScreenViewModel {
     func updateSelectAllActivityType(_ value: Bool) {
         let listSettingType: [ActivitySettingViewModel] = ActivityType.allCases
             .map { ActivitySettingViewModel(activityType: $0, isSelected: value) }
-        publishListSettingType.onNext(listSettingType)
+        dataList.accept(listSettingType)
     }
     
     func saveNightModeValue(withState state: Bool) {
         userDefaults.setNightModeSetting(value: state)
     }
     
-    func saveAllSetting(nightModeState: Bool,
-                        selectAllState: Bool,
-                        numberActivities: Float,
-                        listSettingType: [ActivitySettingViewModel]) {
+    func saveAllSetting(selectAllState: Bool,
+                        numberActivities: Float) {
         
         self.updateSelectAllActivities(withState: selectAllState)
         
-        if listSettingType != getListActivitySetting() {
+        if dataList.value != getListActivitySetting() {
             publishIsSettingChanged.onNext(true)
-            updateListSettingType(withData: listSettingType)
+            updateListSettingType(withData: dataList.value)
         }
         
         if numberActivities != getNumberActivities() {
@@ -94,29 +96,28 @@ extension SettingScreenViewModel {
 // MARK: - PRIVATE FUNCTIONS
 extension SettingScreenViewModel {
     
-    fileprivate func loadSettingValues() {
+    private func loadSettingValues() {
         let listSettingType = getListActivitySetting()
-        publishListSettingType.onNext(listSettingType)
+        dataList.accept(listSettingType)
     }
     
-    fileprivate func getListActivitySetting() -> [ActivitySettingViewModel] {
+    private func getListActivitySetting() -> [ActivitySettingViewModel] {
         return userDefaults.getListActivitySetting()
     }
     
-    fileprivate func updateSelectAllActivities(withState state: Bool) {
+    private func updateSelectAllActivities(withState state: Bool) {
         userDefaults.setSelectAllActivitiesSetting(value: state)
     }
     
-    fileprivate func updateNumberActivites(withNumber number: Int) {
+    private func updateNumberActivites(withNumber number: Int) {
         userDefaults.setNumberActivitiesSetting(value: number)
     }
     
-    fileprivate func updateListSettingType(withData listSettingType: [ActivitySettingViewModel]) {
+    private func updateListSettingType(withData listSettingType: [ActivitySettingViewModel]) {
         userDefaults.setListActivitySetting(value: listSettingType)
     }
     
-    fileprivate func checkUpdateSelectAllSwift(state: Bool,
-                                               withData listSettingType: [ActivitySettingViewModel]) {
+    private func checkUpdateSelectAllSwift(state: Bool, withData listSettingType: [ActivitySettingViewModel]) {
         if state {
             let numNoneSelectType = listSettingType.filter { !$0.getStateSelected() }.count
             if numNoneSelectType == 0 {

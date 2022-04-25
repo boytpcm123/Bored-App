@@ -11,13 +11,11 @@ import RxCocoa
 import SafariServices
 
 class DetailScreenViewController: BaseViewController {
-    
-    static func instantiate(activityViewModel: ActivityViewModel) -> BaseViewController {
-        let controller = DetailScreenViewController()
-        controller.viewModel = DetailScreenViewModel(activityViewModel: activityViewModel)
-        return controller
-    }
-    
+
+    // MARK: - PROPERTIES
+    private var viewModel: DetailScreenViewModel!
+    private let disposeBag = DisposeBag()
+
     // MARK: - OUTLET
     @IBOutlet private weak var activityLbl: UILabel!
     @IBOutlet private weak var participantLbl: UILabel!
@@ -26,10 +24,12 @@ class DetailScreenViewController: BaseViewController {
     @IBOutlet private weak var typeLbl: UILabel!
     @IBOutlet private weak var linkLbl: UILabel!
     @IBOutlet private weak var linkBtn: UIButton!
-    
-    // MARK: - PROPERTIES
-    private var viewModel: DetailScreenViewModel!
-    private let disposeBag = DisposeBag()
+
+    static func instantiate(viewModel: DetailScreenViewModel) -> BaseViewController {
+        let controller = DetailScreenViewController()
+        controller.viewModel = viewModel
+        return controller
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class DetailScreenViewController: BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension DetailScreenViewController {
     
-    fileprivate func setupUI() {
+    private func setupUI() {
         
         self.title = viewModel.getTitleScreen()
         
@@ -54,7 +54,7 @@ extension DetailScreenViewController {
         linkLbl.text = viewModel.getLink()
     }
     
-    fileprivate func bindLinkBtn() {
+    private func bindLinkBtn() {
         linkBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in

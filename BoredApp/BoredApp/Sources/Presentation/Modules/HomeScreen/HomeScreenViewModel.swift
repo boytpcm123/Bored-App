@@ -7,20 +7,25 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import XCoordinator
 
 struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
+    private let router: UnownedRouter<AppRoute>?
     private let userDefaults: UserDefaultManagerProtocol
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
     private let labelQueue = "com.thong.BoredApp.queue"
     
-    let publishListActivityGroup = PublishSubject<[ActivityGroupViewModel]>()
+    var dataList = BehaviorRelay(value: [ActivityGroupViewModel]())
     let showLoading = BehaviorSubject<Bool>(value: true)
     
-    init(boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
+    init(router: UnownedRouter<AppRoute>? = nil,
+         boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
          userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
+        self.router = router
         self.boredNetworkManager = boredNetworkManager
         self.userDefaults = userDefaults
     }
@@ -32,18 +37,26 @@ extension HomeScreenViewModel {
     func getTitleScreen() -> String {
         return "Are you bored?"
     }
-    
-    func getNameType(with listActivityGroup: [ActivityGroupViewModel], atSection section: Int) -> String {
-        let activityGroupViewModel = listActivityGroup[section]
-        return activityGroupViewModel.getTypeActivity()
+
+    func getNumDataList() -> Int {
+        return dataList.value.count
+    }
+
+    func getNumListActivity(at section: Int) -> Int {
+        let activityGroup = dataList.value[section]
+        return activityGroup.getLengthListActivity()
     }
     
-    func getActivityViewModel(with listActivityGroup: [ActivityGroupViewModel],
-                              indexPath: IndexPath) -> ActivityViewModel {
+    func getNameType(at section: Int) -> String {
+        let activityGroup = dataList.value[section]
+        return activityGroup.getTypeActivity()
+    }
+    
+    func getActivity(at indexPath: IndexPath) -> ActivityViewModel {
         
-        let activityGroupViewModel = listActivityGroup[indexPath.section]
-        let activityViewModel = activityGroupViewModel.getActivity(atIndex: indexPath.row)
-        return activityViewModel
+        let activityGroup = dataList.value[indexPath.section]
+        let activity = activityGroup.getActivity(atIndex: indexPath.row)
+        return activity
     }
     
     func fetchActivities() {
@@ -92,16 +105,25 @@ extension HomeScreenViewModel {
         
         dispatchGroup.notify(queue: .main) {
             print("Finished ", listActivityGroup.count)
-            self.publishListActivityGroup.onNext(listActivityGroup)
+            self.dataList.accept(listActivityGroup)
             self.showLoading.onNext(false)
         }
+    }
+
+    func showSetting(settingChanged: @escaping SettingChanged) {
+        self.router?.trigger(.setting(settingChanged))
+    }
+
+    func showDetailActivity(at indexPath: IndexPath) {
+        let activity = getActivity(at: indexPath)
+        self.router?.trigger(.detail(activity))
     }
 }
 
 // MARK: - SUPPORT FUNCTIONS
 extension HomeScreenViewModel {
     
-    fileprivate func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModel {
+    private func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModel {
         
         // var listActivity: [ActivityModel] = Array(setActivity)
         let listActivity = setActivity.sorted { $0.accessibility < $1.accessibility }
@@ -111,11 +133,11 @@ extension HomeScreenViewModel {
         return activityGroupViewModel
     }
     
-    fileprivate func getSettingNumActivities() -> Int {
+    private func getSettingNumActivities() -> Int {
         return userDefaults.getNumberActivitiesSetting()
     }
     
-    fileprivate func getActivityType() -> [ActivityType] {
+    private func getActivityType() -> [ActivityType] {
         let listSettingType: [ActivitySettingViewModel] = userDefaults.getListActivitySetting()
         let listActivityType: [ActivityType] = listSettingType
             .filter { $0.getStateSelected() }

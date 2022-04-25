@@ -11,12 +11,11 @@ import RxCocoa
 
 class SettingScreenController: BaseViewController {
     
-    static func instantiate(onApplySaveSetting: @escaping ((_ settingChanged: Bool) -> Void)) -> BaseViewController {
-        let controller = SettingScreenController()
-        controller.viewModel = SettingScreenViewModel()
-        controller.onApplySaveSetting = onApplySaveSetting
-        return controller
-    }
+    // MARK: - PROPERTIES
+    private var viewModel: SettingScreenViewModel!
+    private var onApplySaveSetting: SettingChanged!
+    private let disposeBag = DisposeBag()
+    private var isSettingChanged: Bool = false
     
     // MARK: - OUTLET
     @IBOutlet private weak var nightModeSwitch: UISwitch!
@@ -40,12 +39,13 @@ class SettingScreenController: BaseViewController {
     }
     @IBOutlet private weak var closeSettingBtn: UIButton!
     
-    // MARK: - PROPERTIES
-    private var viewModel: SettingScreenViewModel!
-    private var onApplySaveSetting:((_ settingChanged: Bool) -> Void)!
-    private let disposeBag = DisposeBag()
-    private var listSettingType: [ActivitySettingViewModel] = []
-    private var isSettingChanged: Bool = false
+    static func instantiate(viewModel: SettingScreenViewModel,
+                            onApplySaveSetting: @escaping SettingChanged) -> BaseViewController {
+        let controller = SettingScreenController()
+        controller.viewModel = viewModel
+        controller.onApplySaveSetting = onApplySaveSetting
+        return controller
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class SettingScreenController: BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension SettingScreenController {
     
-    fileprivate func setupUI() {
+    private func setupUI() {
         
         self.isModalInPresentation = true
         
@@ -71,7 +71,7 @@ extension SettingScreenController {
         viewModel.getStateSelectAll()
     }
     
-    fileprivate func bindData() {
+    private func bindData() {
         
         viewModel.publishIsSettingChanged
             .subscribe(onNext: {
@@ -83,33 +83,29 @@ extension SettingScreenController {
             .bind(to: selectAllTypeSwitch.rx.value)
             .disposed(by: disposeBag)
         
-        viewModel.publishListSettingType
-            .subscribe(onNext: {
-                self.listSettingType = $0
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.publishListSettingType
+        viewModel.dataList
             .catchAndReturn([])
             .bind(to:
                     tableView.rx.items(
                         cellIdentifier: SettingActivityCell.dequeueIdentifier,
-                        cellType: SettingActivityCell.self)) { _, activitySettingViewModel, cell in
-                            cell.bindData(activitySettingViewModel)
-                        }
-                        .disposed(by: disposeBag)
+                        cellType: SettingActivityCell.self
+                    )
+            ) { _, activitySettingViewModel, cell in
+                cell.bindData(activitySettingViewModel)
+            }
+            .disposed(by: disposeBag)
         
         Observable.zip(tableView.rx.modelSelected(ActivitySettingViewModel.self),
                        tableView.rx.itemSelected)
             .bind { [weak self] _, indexPath in
                 guard let self = self else { return }
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                self.viewModel.updateStateSelect(atIndex: indexPath.row, withData: self.listSettingType)
+                self.viewModel.updateStateSelect(atIndex: indexPath.row)
             }
             .disposed(by: disposeBag)
     }
     
-    fileprivate func bindAction() {
+    private func bindAction() {
         bindNightModeSwitch()
         bindSliderActivities()
         bindSelectAllTypeSwitch()
@@ -121,7 +117,7 @@ extension SettingScreenController {
 // MARK: - SUPPORT FUCTIONS
 extension SettingScreenController {
     
-    fileprivate func bindNightModeSwitch() {
+    private func bindNightModeSwitch() {
         nightModeSwitch.rx.value
             .changed.subscribe(onNext: { [weak self] value in
                 guard let self = self else { return }
@@ -132,7 +128,7 @@ extension SettingScreenController {
             .disposed(by: disposeBag)
     }
     
-    fileprivate func bindSliderActivities() {
+    private func bindSliderActivities() {
         sliderActivities.rx.value
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] value in
@@ -145,7 +141,7 @@ extension SettingScreenController {
             .disposed(by: disposeBag)
     }
     
-    fileprivate func bindSelectAllTypeSwitch() {
+    private func bindSelectAllTypeSwitch() {
         selectAllTypeSwitch.rx.value
             .changed.subscribe(onNext: { [weak self] value in
                 self?.viewModel.updateSelectAllActivityType(value)
@@ -153,16 +149,14 @@ extension SettingScreenController {
             .disposed(by: disposeBag)
     }
     
-    fileprivate func bindCloseBtn() {
+    private func bindCloseBtn() {
         applyChangeBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 
-                self.viewModel.saveAllSetting(nightModeState: self.nightModeSwitch.isOn,
-                                              selectAllState: self.selectAllTypeSwitch.isOn,
-                                              numberActivities: self.sliderActivities.value,
-                                              listSettingType: self.listSettingType)
+                self.viewModel.saveAllSetting(selectAllState: self.selectAllTypeSwitch.isOn,
+                                              numberActivities: self.sliderActivities.value)
                 
                 self.dismiss(animated: true) {
                     self.onApplySaveSetting(self.isSettingChanged)
@@ -171,7 +165,7 @@ extension SettingScreenController {
             .disposed(by: disposeBag)
     }
     
-    fileprivate func bindApplyChangeBtn() {
+    private func bindApplyChangeBtn() {
         closeSettingBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in

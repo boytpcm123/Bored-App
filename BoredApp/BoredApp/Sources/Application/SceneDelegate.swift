@@ -10,12 +10,14 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private let router = AppCoordinator().strongRouter
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
-        self.window = UIWindow(windowScene: scene)
-        setRootViewController()
+        let window = UIWindow(windowScene: scene)
+        router.setRoot(for: window)
+        self.window = window
     }
 }
 
@@ -32,10 +34,4 @@ extension SceneDelegate {
 // MARK: - SUPPORT FUCTIONS
 extension SceneDelegate {
     
-    private func setRootViewController() {
-        let controller = HomeScreenController.instantiate()
-        let navVC: UINavigationController = UINavigationController(rootViewController: controller)
-        window?.rootViewController = navVC
-        window?.makeKeyAndVisible()
-    }
 }

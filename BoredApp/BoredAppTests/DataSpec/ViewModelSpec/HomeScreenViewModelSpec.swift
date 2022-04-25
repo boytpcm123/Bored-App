@@ -24,11 +24,11 @@ class HomeScreenViewModelSpec: QuickSpec {
             context("test acctivities") {
                 beforeEach {}
                 it("should get the list activies") {
-                    viewModel.publishListActivityGroup
+                    viewModel.dataList
                         .catchAndReturn([])
                         .subscribe(onNext: { listActivityGroup in
                             print(listActivityGroup)
-                            expect(listActivityGroup.isEmpty).to(beFalse())
+                            expect(listActivityGroup.isEmpty).to(beFalse(), description: "Should have false value")
                         })
                         .disposed(by: disposeBag)
                     viewModel.fetchActivities()
