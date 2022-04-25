@@ -8,15 +8,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import ProgressHUD
 
 class HomeScreenController: BaseViewController {
     
-    static func instantiate() -> BaseViewController {
-        let controller = HomeScreenController()
-        controller.viewModel = HomeScreenViewModel()
-        return controller
-    }
+    // MARK: - PROPERTIES
+    private var viewModel: HomeScreenViewModel!
+    private let disposeBag = DisposeBag()
+    private let refreshControl = UIRefreshControl()
     
     // MARK: - OUTLET
     @IBOutlet private weak var tableView: UITableView! {
@@ -34,12 +32,12 @@ class HomeScreenController: BaseViewController {
     }
     @IBOutlet private weak var settingBtn: UIButton!
     @IBOutlet private weak var emptyTextLbl: UILabel!
-    
-    // MARK: - PROPERTIES
-    private var viewModel: HomeScreenViewModel!
-    private let disposeBag = DisposeBag()
-    private var listActivityGroup: [ActivityGroupViewModel] = []
-    private let refreshControl = UIRefreshControl()
+
+    static func instantiate(viewModel: HomeScreenViewModel) -> BaseViewController {
+        let controller = HomeScreenController()
+        controller.viewModel = viewModel
+        return controller
+    }
     
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
@@ -59,7 +57,7 @@ class HomeScreenController: BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension HomeScreenController {
     
-    fileprivate func setupUI() {
+    private func setupUI() {
         
         self.title = viewModel.getTitleScreen()
         self.emptyTextLbl.text = "Oop! You don't like any activity, right? :((\nPlease try one more time !!!"
@@ -67,59 +65,56 @@ extension HomeScreenController {
         tableView.refreshControl = refreshControl
     }
     
-    fileprivate func bindData() {
+    private func bindData() {
         
         refreshControl.rx
             .controlEvent(.valueChanged)
             .asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchActivities()
-                ProgressHUD.show()
+                HUD.toggleLoading(isLoading: true)
             })
             .disposed(by: disposeBag)
         
         viewModel.showLoading
             .subscribe(onNext: { [weak self] isLoading in
-                isLoading ? ProgressHUD.show() : ProgressHUD.dismiss()
+                HUD.toggleLoading(isLoading: isLoading)
                 if !isLoading {
                     self?.refreshControl.endRefreshing()
                 }
             })
             .disposed(by: disposeBag)
         
-        viewModel.publishListActivityGroup
+        viewModel.dataList
             .catchAndReturn([])
-            .subscribe(onNext: { [weak self] listActivityGroup in
+            .skip(1) // Ignore init empty dataList
+            .subscribe(onNext: { [weak self] dataList in
                 guard let self = self else { return }
                 
-                self.listActivityGroup = listActivityGroup
                 self.tableView.reloadData()
-                self.tableView.alpha = self.listActivityGroup.isEmpty ? 0 : 1
+                self.tableView.alpha = dataList.isEmpty ? 0 : 1
             })
             .disposed(by: disposeBag)
         
     }
     
-    fileprivate func fetchActivities() {
+    private func fetchActivities() {
         viewModel.fetchActivities()
     }
     
-    fileprivate func bindSettingBtn() {
+    private func bindSettingBtn() {
         settingBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                
-                let controller = SettingScreenController.instantiate { settingChanged in
+
+                let settingChanged: SettingChanged = { settingChanged in
                     guard settingChanged else { return }
-                    
                     self.tableView.alpha = 1
                     self.viewModel.fetchActivities()
                 }
-                
-                let navVC: UINavigationController = UINavigationController(rootViewController: controller)
-                navVC.modalPresentationStyle = .automatic
-                self.present(navVC, animated: true, completion: nil)
+
+                self.viewModel.showSetting(settingChanged: settingChanged)
             })
             .disposed(by: disposeBag)
     }
@@ -130,12 +125,11 @@ extension HomeScreenController {
 extension HomeScreenController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return listActivityGroup.count
+        return viewModel.getNumDataList()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let activityGroupViewModel = listActivityGroup[section]
-        return activityGroupViewModel.getLengthListActivity()
+        return viewModel.getNumListActivity(at: section)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -149,7 +143,7 @@ extension HomeScreenController: UITableViewDataSource {
                     return UIView()
                 }
         
-        let nameType = viewModel.getNameType(with: listActivityGroup, atSection: section)
+        let nameType = viewModel.getNameType(at: section)
         activityHeaderCellView.bindData(nameType)
         return activityHeaderCellView
     }
@@ -160,7 +154,7 @@ extension HomeScreenController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let activityViewModel = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
+        let activityViewModel = viewModel.getActivity(at: indexPath)
         cell.bindData(activityViewModel)
         return cell
     }
@@ -172,9 +166,7 @@ extension HomeScreenController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let activityViewModel = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
-        let controller = DetailScreenViewController.instantiate(activityViewModel: activityViewModel)
-        self.navigationController?.pushViewController(controller, animated: true)
+
+        viewModel.showDetailActivity(at: indexPath)
     }
 }
