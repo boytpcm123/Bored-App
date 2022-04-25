@@ -24,7 +24,7 @@ class HomeScreenViewModelSpec: QuickSpec {
             context("test acctivities") {
                 beforeEach {}
                 it("should get the list activies") {
-                    viewModel.publishListActivityGroup
+                    viewModel.dataList
                         .catchAndReturn([])
                         .subscribe(onNext: { listActivityGroup in
                             print(listActivityGroup)

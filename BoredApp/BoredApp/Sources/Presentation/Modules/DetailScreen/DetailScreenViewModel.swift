@@ -10,10 +10,10 @@ import XCoordinator
 
 struct DetailScreenViewModel {
 
-    private let router: UnownedRouter<AppRoute>
+    private let router: UnownedRouter<AppRoute>?
     private let activityViewModel: ActivityViewModel
     
-    init(router: UnownedRouter<AppRoute>,
+    init(router: UnownedRouter<AppRoute>? = nil,
          activity: ActivityViewModel) {
         self.router = router
         self.activityViewModel = activity

@@ -15,7 +15,6 @@ class SettingScreenController: BaseViewController {
     private var viewModel: SettingScreenViewModel!
     private var onApplySaveSetting: SettingChanged!
     private let disposeBag = DisposeBag()
-    private var listSettingType: [ActivitySettingViewModel] = []
     private var isSettingChanged: Bool = false
     
     // MARK: - OUTLET
@@ -84,13 +83,7 @@ extension SettingScreenController {
             .bind(to: selectAllTypeSwitch.rx.value)
             .disposed(by: disposeBag)
         
-        viewModel.publishListSettingType
-            .subscribe(onNext: {
-                self.listSettingType = $0
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.publishListSettingType
+        viewModel.dataList
             .catchAndReturn([])
             .bind(to:
                     tableView.rx.items(
@@ -107,7 +100,7 @@ extension SettingScreenController {
             .bind { [weak self] _, indexPath in
                 guard let self = self else { return }
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                self.viewModel.updateStateSelect(atIndex: indexPath.row, withData: self.listSettingType)
+                self.viewModel.updateStateSelect(atIndex: indexPath.row)
             }
             .disposed(by: disposeBag)
     }
@@ -163,8 +156,7 @@ extension SettingScreenController {
                 guard let self = self else { return }
                 
                 self.viewModel.saveAllSetting(selectAllState: self.selectAllTypeSwitch.isOn,
-                                              numberActivities: self.sliderActivities.value,
-                                              listSettingType: self.listSettingType)
+                                              numberActivities: self.sliderActivities.value)
                 
                 self.dismiss(animated: true) {
                     self.onApplySaveSetting(self.isSettingChanged)

@@ -14,7 +14,6 @@ class HomeScreenController: BaseViewController {
     // MARK: - PROPERTIES
     private var viewModel: HomeScreenViewModel!
     private let disposeBag = DisposeBag()
-    private var listActivityGroup: [ActivityGroupViewModel] = []
     private let refreshControl = UIRefreshControl()
     
     // MARK: - OUTLET
@@ -86,14 +85,14 @@ extension HomeScreenController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.publishListActivityGroup
+        viewModel.dataList
             .catchAndReturn([])
-            .subscribe(onNext: { [weak self] listActivityGroup in
+            .skip(1) // Ignore init empty dataList
+            .subscribe(onNext: { [weak self] dataList in
                 guard let self = self else { return }
                 
-                self.listActivityGroup = listActivityGroup
                 self.tableView.reloadData()
-                self.tableView.alpha = self.listActivityGroup.isEmpty ? 0 : 1
+                self.tableView.alpha = dataList.isEmpty ? 0 : 1
             })
             .disposed(by: disposeBag)
         
@@ -126,12 +125,11 @@ extension HomeScreenController {
 extension HomeScreenController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return listActivityGroup.count
+        return viewModel.getNumDataList()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let activityGroupViewModel = listActivityGroup[section]
-        return activityGroupViewModel.getLengthListActivity()
+        return viewModel.getNumListActivity(at: section)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -145,7 +143,7 @@ extension HomeScreenController: UITableViewDataSource {
                     return UIView()
                 }
         
-        let nameType = viewModel.getNameType(with: listActivityGroup, atSection: section)
+        let nameType = viewModel.getNameType(at: section)
         activityHeaderCellView.bindData(nameType)
         return activityHeaderCellView
     }
@@ -156,7 +154,7 @@ extension HomeScreenController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let activityViewModel = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
+        let activityViewModel = viewModel.getActivity(at: indexPath)
         cell.bindData(activityViewModel)
         return cell
     }
@@ -169,7 +167,6 @@ extension HomeScreenController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let activity = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
-        viewModel.showDetailActivity(activity: activity)
+        viewModel.showDetailActivity(at: indexPath)
     }
 }
