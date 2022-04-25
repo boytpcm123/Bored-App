@@ -13,7 +13,7 @@ class SettingScreenController: BaseViewController {
     
     // MARK: - PROPERTIES
     private var viewModel: SettingScreenViewModel!
-    private var onApplySaveSetting:((_ settingChanged: Bool) -> Void)!
+    private var onApplySaveSetting: SettingChanged!
     private let disposeBag = DisposeBag()
     private var listSettingType: [ActivitySettingViewModel] = []
     private var isSettingChanged: Bool = false
@@ -40,9 +40,10 @@ class SettingScreenController: BaseViewController {
     }
     @IBOutlet private weak var closeSettingBtn: UIButton!
     
-    static func instantiate(onApplySaveSetting: @escaping ((_ settingChanged: Bool) -> Void)) -> BaseViewController {
+    static func instantiate(viewModel: SettingScreenViewModel,
+                            onApplySaveSetting: @escaping SettingChanged) -> BaseViewController {
         let controller = SettingScreenController()
-        controller.viewModel = SettingScreenViewModel()
+        controller.viewModel = viewModel
         controller.onApplySaveSetting = onApplySaveSetting
         return controller
     }

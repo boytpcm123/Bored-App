@@ -7,18 +7,21 @@
 
 import Foundation
 import RxSwift
+import XCoordinator
 
 struct SettingScreenViewModel {
     
     // MARK: - PROPERTIES
+    private let router: UnownedRouter<AppRoute>
     private let userDefaults: UserDefaultManagerProtocol
     let publishListSettingType = BehaviorSubject<[ActivitySettingViewModel]>(value: [])
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
     let publishIsSettingChanged = BehaviorSubject<Bool>(value: false)
     
-    init(userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
+    init(router: UnownedRouter<AppRoute>,
+         userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
+        self.router = router
         self.userDefaults = userDefaults
-    
         self.loadSettingValues()
     }
 }

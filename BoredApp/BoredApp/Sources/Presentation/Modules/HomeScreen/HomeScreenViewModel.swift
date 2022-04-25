@@ -7,10 +7,12 @@
 
 import Foundation
 import RxSwift
+import XCoordinator
 
 struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
+    private let router: UnownedRouter<AppRoute>
     private let userDefaults: UserDefaultManagerProtocol
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
@@ -19,8 +21,10 @@ struct HomeScreenViewModel {
     let publishListActivityGroup = PublishSubject<[ActivityGroupViewModel]>()
     let showLoading = BehaviorSubject<Bool>(value: true)
     
-    init(boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
+    init(router: UnownedRouter<AppRoute>,
+         boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
          userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
+        self.router = router
         self.boredNetworkManager = boredNetworkManager
         self.userDefaults = userDefaults
     }
@@ -95,6 +99,14 @@ extension HomeScreenViewModel {
             self.publishListActivityGroup.onNext(listActivityGroup)
             self.showLoading.onNext(false)
         }
+    }
+
+    func showSetting(settingChanged: @escaping SettingChanged) {
+        self.router.trigger(.setting(settingChanged))
+    }
+
+    func showDetailActivity(activity: ActivityViewModel) {
+        self.router.trigger(.detail(activity))
     }
 }
 

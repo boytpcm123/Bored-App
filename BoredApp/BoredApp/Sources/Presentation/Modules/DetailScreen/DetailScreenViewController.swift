@@ -25,9 +25,9 @@ class DetailScreenViewController: BaseViewController {
     @IBOutlet private weak var linkLbl: UILabel!
     @IBOutlet private weak var linkBtn: UIButton!
 
-    static func instantiate(activityViewModel: ActivityViewModel) -> BaseViewController {
+    static func instantiate(viewModel: DetailScreenViewModel) -> BaseViewController {
         let controller = DetailScreenViewController()
-        controller.viewModel = DetailScreenViewModel(activityViewModel: activityViewModel)
+        controller.viewModel = viewModel
         return controller
     }
 

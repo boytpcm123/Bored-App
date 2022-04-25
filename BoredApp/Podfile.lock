@@ -16,6 +16,9 @@ PODS:
   - RxSwift (6.5.0)
   - SwiftLint (0.46.5)
   - Wormholy (1.6.5)
+  - XCoordinator/Combine (2.2.0):
+    - XCoordinator/Core
+  - XCoordinator/Core (2.2.0)
 
 DEPENDENCIES:
   - Moya/RxSwift (~> 15.0)
@@ -26,6 +29,7 @@ DEPENDENCIES:
   - RxSwift (~> 6.5.0)
   - SwiftLint (~> 0.46.5)
   - Wormholy (~> 1.6.5)
+  - XCoordinator/Combine (~> 2.0)
 
 SPEC REPOS:
   trunk:
@@ -39,6 +43,7 @@ SPEC REPOS:
     - RxSwift
     - SwiftLint
     - Wormholy
+    - XCoordinator
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -51,7 +56,8 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SwiftLint: 2c16e8fa99dac2e440dc0c70ea74d2532048f6cf
   Wormholy: 3252bc3e55a1847ef9a0976c1377bd77bf3635fa
+  XCoordinator: a5f91e43ee944f508529763921165697d3211629
 
-PODFILE CHECKSUM: 3943c8c2a8583f7c59a9abfad3799eec8be22af2
+PODFILE CHECKSUM: 24e118e31a33b90a97b68acc2214cef7598192c5
 
 COCOAPODS: 1.11.3

@@ -6,13 +6,17 @@
 //
 
 import Foundation
+import XCoordinator
 
 struct DetailScreenViewModel {
-    
+
+    private let router: UnownedRouter<AppRoute>
     private let activityViewModel: ActivityViewModel
     
-    init(activityViewModel: ActivityViewModel) {
-        self.activityViewModel = activityViewModel
+    init(router: UnownedRouter<AppRoute>,
+         activity: ActivityViewModel) {
+        self.router = router
+        self.activityViewModel = activity
     }
 }
 

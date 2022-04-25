@@ -34,9 +34,9 @@ class HomeScreenController: BaseViewController {
     @IBOutlet private weak var settingBtn: UIButton!
     @IBOutlet private weak var emptyTextLbl: UILabel!
 
-    static func instantiate() -> BaseViewController {
+    static func instantiate(viewModel: HomeScreenViewModel) -> BaseViewController {
         let controller = HomeScreenController()
-        controller.viewModel = HomeScreenViewModel()
+        controller.viewModel = viewModel
         return controller
     }
     
@@ -108,17 +108,14 @@ extension HomeScreenController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                
-                let controller = SettingScreenController.instantiate { settingChanged in
+
+                let settingChanged: SettingChanged = { settingChanged in
                     guard settingChanged else { return }
-                    
                     self.tableView.alpha = 1
                     self.viewModel.fetchActivities()
                 }
-                
-                let navVC: UINavigationController = UINavigationController(rootViewController: controller)
-                navVC.modalPresentationStyle = .automatic
-                self.present(navVC, animated: true, completion: nil)
+
+                self.viewModel.showSetting(settingChanged: settingChanged)
             })
             .disposed(by: disposeBag)
     }
@@ -171,9 +168,8 @@ extension HomeScreenController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let activityViewModel = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
-        let controller = DetailScreenViewController.instantiate(activityViewModel: activityViewModel)
-        self.navigationController?.pushViewController(controller, animated: true)
+
+        let activity = viewModel.getActivityViewModel(with: listActivityGroup, indexPath: indexPath)
+        viewModel.showDetailActivity(activity: activity)
     }
 }
