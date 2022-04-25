@@ -42,7 +42,7 @@ class DetailScreenViewController: BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension DetailScreenViewController {
     
-    fileprivate func setupUI() {
+    private func setupUI() {
         
         self.title = viewModel.getTitleScreen()
         
@@ -54,7 +54,7 @@ extension DetailScreenViewController {
         linkLbl.text = viewModel.getLink()
     }
     
-    fileprivate func bindLinkBtn() {
+    private func bindLinkBtn() {
         linkBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in

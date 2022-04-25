@@ -53,7 +53,7 @@ extension BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension BaseViewController {
     
-    fileprivate func setupUI() {
+    private func setupUI() {
         updateNightMode()
 //        navigationController?.navigationBar.isTranslucent = false
 //        navigationController?.navigationBar.tintColor = .gray

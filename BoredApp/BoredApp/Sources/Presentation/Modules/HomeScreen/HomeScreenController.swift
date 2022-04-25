@@ -59,7 +59,7 @@ class HomeScreenController: BaseViewController {
 // MARK: - SUPPORT FUCTIONS
 extension HomeScreenController {
     
-    fileprivate func setupUI() {
+    private func setupUI() {
         
         self.title = viewModel.getTitleScreen()
         self.emptyTextLbl.text = "Oop! You don't like any activity, right? :((\nPlease try one more time !!!"
@@ -67,7 +67,7 @@ extension HomeScreenController {
         tableView.refreshControl = refreshControl
     }
     
-    fileprivate func bindData() {
+    private func bindData() {
         
         refreshControl.rx
             .controlEvent(.valueChanged)
@@ -100,11 +100,11 @@ extension HomeScreenController {
         
     }
     
-    fileprivate func fetchActivities() {
+    private func fetchActivities() {
         viewModel.fetchActivities()
     }
     
-    fileprivate func bindSettingBtn() {
+    private func bindSettingBtn() {
         settingBtn.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in

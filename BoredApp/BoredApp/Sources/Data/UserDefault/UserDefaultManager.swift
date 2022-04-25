@@ -75,37 +75,37 @@ extension UserDefaultManager {
 // MARK: - SUPPORT FUNCTIONS
 extension UserDefaultManager {
     
-    fileprivate func getString(key: String) -> String {
+    private func getString(key: String) -> String {
         userDefaults.string(forKey: key) ?? ""
     }
     
-    fileprivate func setString(key: String, value: String) {
+    private func setString(key: String, value: String) {
         userDefaults.set(value, forKey: key)
     }
     
-    fileprivate func getBool(key: String) -> Bool? {
+    private func getBool(key: String) -> Bool? {
         if let value = userDefaults.value(forKey: key) {
             return value as? Bool
         }
         return nil
     }
     
-    fileprivate func setBool(key: String, value: Bool) {
+    private func setBool(key: String, value: Bool) {
         userDefaults.set(value, forKey: key)
     }
     
-    fileprivate func getInt(key: String) -> Int? {
+    private func getInt(key: String) -> Int? {
         if let value = userDefaults.value(forKey: key) {
             return value as? Int
         }
         return nil
     }
     
-    fileprivate func setInt(key: String, value: Int) {
+    private func setInt(key: String, value: Int) {
         userDefaults.set(value, forKey: key)
     }
     
-    fileprivate func setObject<Object>(_ object: Object, forKey: String) where Object: Encodable {
+    private func setObject<Object>(_ object: Object, forKey: String) where Object: Encodable {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(object)
@@ -116,7 +116,7 @@ extension UserDefaultManager {
         }
     }
     
-    fileprivate func getObject<Object>(forKey: String, castTo type: Object.Type) -> Object? where Object: Decodable {
+    private func getObject<Object>(forKey: String, castTo type: Object.Type) -> Object? where Object: Decodable {
         guard let data = userDefaults.data(forKey: forKey) else { return nil }
         let decoder = JSONDecoder()
         do {
@@ -128,7 +128,7 @@ extension UserDefaultManager {
         }
     }
     
-    fileprivate func remove(key: String) {
+    private func remove(key: String) {
         userDefaults.removeObject(forKey: key)
     }
 }

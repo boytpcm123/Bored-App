@@ -101,7 +101,7 @@ extension HomeScreenViewModel {
 // MARK: - SUPPORT FUNCTIONS
 extension HomeScreenViewModel {
     
-    fileprivate func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModel {
+    private func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModel {
         
         // var listActivity: [ActivityModel] = Array(setActivity)
         let listActivity = setActivity.sorted { $0.accessibility < $1.accessibility }
@@ -111,11 +111,11 @@ extension HomeScreenViewModel {
         return activityGroupViewModel
     }
     
-    fileprivate func getSettingNumActivities() -> Int {
+    private func getSettingNumActivities() -> Int {
         return userDefaults.getNumberActivitiesSetting()
     }
     
-    fileprivate func getActivityType() -> [ActivityType] {
+    private func getActivityType() -> [ActivityType] {
         let listSettingType: [ActivitySettingViewModel] = userDefaults.getListActivitySetting()
         let listActivityType: [ActivityType] = listSettingType
             .filter { $0.getStateSelected() }

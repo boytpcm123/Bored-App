@@ -93,29 +93,28 @@ extension SettingScreenViewModel {
 // MARK: - PRIVATE FUNCTIONS
 extension SettingScreenViewModel {
     
-    fileprivate func loadSettingValues() {
+    private func loadSettingValues() {
         let listSettingType = getListActivitySetting()
         publishListSettingType.onNext(listSettingType)
     }
     
-    fileprivate func getListActivitySetting() -> [ActivitySettingViewModel] {
+    private func getListActivitySetting() -> [ActivitySettingViewModel] {
         return userDefaults.getListActivitySetting()
     }
     
-    fileprivate func updateSelectAllActivities(withState state: Bool) {
+    private func updateSelectAllActivities(withState state: Bool) {
         userDefaults.setSelectAllActivitiesSetting(value: state)
     }
     
-    fileprivate func updateNumberActivites(withNumber number: Int) {
+    private func updateNumberActivites(withNumber number: Int) {
         userDefaults.setNumberActivitiesSetting(value: number)
     }
     
-    fileprivate func updateListSettingType(withData listSettingType: [ActivitySettingViewModel]) {
+    private func updateListSettingType(withData listSettingType: [ActivitySettingViewModel]) {
         userDefaults.setListActivitySetting(value: listSettingType)
     }
     
-    fileprivate func checkUpdateSelectAllSwift(state: Bool,
-                                               withData listSettingType: [ActivitySettingViewModel]) {
+    private func checkUpdateSelectAllSwift(state: Bool, withData listSettingType: [ActivitySettingViewModel]) {
         if state {
             let numNoneSelectType = listSettingType.filter { !$0.getStateSelected() }.count
             if numNoneSelectType == 0 {
