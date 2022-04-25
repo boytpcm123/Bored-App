@@ -34,31 +34,31 @@ struct UserDefaultManager: UserDefaultManagerProtocol {
 extension UserDefaultManager {
     
     func getNightModeSetting() -> Bool {
-        return self.getBool(key: Constants.UserDefaultsKey.nightMode) ?? Constants.initNightMode
+        return self.getBool(dataType: .nightMode)
     }
     
     func setNightModeSetting(value: Bool) {
-        self.setBool(key: Constants.UserDefaultsKey.nightMode, value: value)
+        self.setBool(dataType: .nightMode, value: value)
     }
     
     func getSelectAllActivitiesSetting() -> Bool {
-        return self.getBool(key: Constants.UserDefaultsKey.selectAllActivities) ?? Constants.initSelectAllActivities
+        return self.getBool(dataType: .selectAllActivities)
     }
     
     func setSelectAllActivitiesSetting(value: Bool) {
-        self.setBool(key: Constants.UserDefaultsKey.selectAllActivities, value: value)
+        self.setBool(dataType: .selectAllActivities, value: value)
     }
     
     func getNumberActivitiesSetting() -> Int {
-        return self.getInt(key: Constants.UserDefaultsKey.numberActivities) ?? Constants.initNumActivities
+        return self.getInt(dataType: .numberActivities)
     }
     
     func setNumberActivitiesSetting(value: Int) {
-        self.setInt(key: Constants.UserDefaultsKey.numberActivities, value: value)
+        self.setInt(dataType: .numberActivities, value: value)
     }
     
     func getListActivitySetting() -> [ActivitySettingViewModel] {
-        if let listSettingType = getObject(forKey: Constants.UserDefaultsKey.listSettingType,
+        if let listSettingType = getObject(dataType: .listSettingType,
                                            castTo: Array<ActivitySettingViewModel>.self) {
             return listSettingType
         }
@@ -67,7 +67,7 @@ extension UserDefaultManager {
     }
     
     func setListActivitySetting(value: [ActivitySettingViewModel]) {
-        self.setObject(value, forKey: Constants.UserDefaultsKey.listSettingType)
+        self.setObject(dataType: .listSettingType, object: value)
     }
     
 }
@@ -75,49 +75,50 @@ extension UserDefaultManager {
 // MARK: - SUPPORT FUNCTIONS
 extension UserDefaultManager {
     
-    private func getString(key: String) -> String {
-        userDefaults.string(forKey: key) ?? ""
+    private func getString(dataType: UserDefaultsDataType) -> String {
+        userDefaults.string(forKey: dataType.key()) ?? ""
     }
     
-    private func setString(key: String, value: String) {
-        userDefaults.set(value, forKey: key)
+    private func setString(dataType: UserDefaultsDataType, value: String) {
+        userDefaults.set(value, forKey: dataType.key())
     }
-    
-    private func getBool(key: String) -> Bool? {
-        if let value = userDefaults.value(forKey: key) {
-            return value as? Bool
+
+    private func getBool(dataType: UserDefaultsDataType) -> Bool {
+        if let value = userDefaults.value(forKey: dataType.key()) {
+            return value as? Bool ?? false
         }
-        return nil
+
+        return dataType.defaultValue() as? Bool ?? false
     }
     
-    private func setBool(key: String, value: Bool) {
-        userDefaults.set(value, forKey: key)
+    private func setBool(dataType: UserDefaultsDataType, value: Bool) {
+        userDefaults.set(value, forKey: dataType.key())
     }
     
-    private func getInt(key: String) -> Int? {
-        if let value = userDefaults.value(forKey: key) {
-            return value as? Int
+    private func getInt(dataType: UserDefaultsDataType) -> Int {
+        if let value = userDefaults.value(forKey: dataType.key()) {
+            return value as? Int ?? 0
         }
-        return nil
+        return dataType.defaultValue() as? Int ?? 0
     }
     
-    private func setInt(key: String, value: Int) {
-        userDefaults.set(value, forKey: key)
+    private func setInt(dataType: UserDefaultsDataType, value: Int) {
+        userDefaults.set(value, forKey: dataType.key())
     }
     
-    private func setObject<Object>(_ object: Object, forKey: String) where Object: Encodable {
+    private func setObject<Object>(dataType: UserDefaultsDataType, object: Object) where Object: Encodable {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(object)
-            userDefaults.set(data, forKey: forKey)
+            userDefaults.set(data, forKey: dataType.key())
             userDefaults.synchronize()
         } catch {
             print("Failed to encode object:", error.localizedDescription)
         }
     }
     
-    private func getObject<Object>(forKey: String, castTo type: Object.Type) -> Object? where Object: Decodable {
-        guard let data = userDefaults.data(forKey: forKey) else { return nil }
+    private func getObject<Object>(dataType: UserDefaultsDataType, castTo type: Object.Type) -> Object? where Object: Decodable {
+        guard let data = userDefaults.data(forKey: dataType.key()) else { return nil }
         let decoder = JSONDecoder()
         do {
             let object = try decoder.decode(type, from: data)
@@ -128,7 +129,7 @@ extension UserDefaultManager {
         }
     }
     
-    private func remove(key: String) {
-        userDefaults.removeObject(forKey: key)
+    private func remove(dataType: UserDefaultsDataType) {
+        userDefaults.removeObject(forKey: dataType.key())
     }
 }

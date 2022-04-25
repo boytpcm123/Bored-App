@@ -46,8 +46,10 @@
 		591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729C127F6CF0C0080303E /* SettingActivityCell.xib */; };
 		591729C727F6D3820080303E /* ActivitySettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C627F6D3820080303E /* ActivitySettingViewModel.swift */; };
 		591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C827F6EB4B0080303E /* UserDefaultManager.swift */; };
-		593E672228163A59003FAD22 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672128163A59003FAD22 /* UserDefaultsKey.swift */; };
+		593E672228163A59003FAD22 /* UserDefaultsDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672128163A59003FAD22 /* UserDefaultsDataType.swift */; };
 		593E672428163A78003FAD22 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672328163A78003FAD22 /* API.swift */; };
+		593E67262816400B003FAD22 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E67252816400B003FAD22 /* HUD.swift */; };
+		593E672A28164226003FAD22 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 593E672928164226003FAD22 /* .swiftlint.yml */; };
 		595B987927F75F1400B085BE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B987827F75F1400B085BE /* MockData.swift */; };
 		595B987E27F7688100B085BE /* BoredNetworkManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B987D27F7688100B085BE /* BoredNetworkManagerSpec.swift */; };
 		595B988127F76EF900B085BE /* UserDefaultManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */; };
@@ -125,8 +127,10 @@
 		591729C127F6CF0C0080303E /* SettingActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingActivityCell.xib; sourceTree = "<group>"; };
 		591729C627F6D3820080303E /* ActivitySettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingViewModel.swift; sourceTree = "<group>"; };
 		591729C827F6EB4B0080303E /* UserDefaultManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		593E672128163A59003FAD22 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		593E672128163A59003FAD22 /* UserDefaultsDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataType.swift; sourceTree = "<group>"; };
 		593E672328163A78003FAD22 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		593E67252816400B003FAD22 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		593E672928164226003FAD22 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		595B987827F75F1400B085BE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		595B987D27F7688100B085BE /* BoredNetworkManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoredNetworkManagerSpec.swift; sourceTree = "<group>"; };
 		595B988027F76EF900B085BE /* UserDefaultManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManagerSpec.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 		5917292727F49E650080303E /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				593E6728281641FC003FAD22 /* SwiftLint */,
 				5917292C27F49EEB0080303E /* Fastlane */,
 				5917292D27F49F330080303E /* Plists */,
 			);
@@ -318,6 +323,7 @@
 		5917293827F4A0720080303E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				593E6727281641DB003FAD22 /* HUD */,
 				5917293927F4A0720080303E /* Typealiases */,
 			);
 			path = Helpers;
@@ -430,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				5917297227F4A0720080303E /* Constants.swift */,
-				593E672128163A59003FAD22 /* UserDefaultsKey.swift */,
 				593E672328163A78003FAD22 /* API.swift */,
 			);
 			path = Constants;
@@ -505,9 +510,26 @@
 		591729CA27F6EB570080303E /* UserDefault */ = {
 			isa = PBXGroup;
 			children = (
+				593E672128163A59003FAD22 /* UserDefaultsDataType.swift */,
 				591729C827F6EB4B0080303E /* UserDefaultManager.swift */,
 			);
 			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		593E6727281641DB003FAD22 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				593E67252816400B003FAD22 /* HUD.swift */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		593E6728281641FC003FAD22 /* SwiftLint */ = {
+			isa = PBXGroup;
+			children = (
+				593E672928164226003FAD22 /* .swiftlint.yml */,
+			);
+			path = SwiftLint;
 			sourceTree = "<group>";
 		};
 		595B987627F75EEC00B085BE /* Features */ = {
@@ -706,6 +728,7 @@
 				591729A427F4BC9A0080303E /* ActivityCell.xib in Resources */,
 				5917298527F4A0720080303E /* HomeScreenController.xib in Resources */,
 				591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */,
+				593E672A28164226003FAD22 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,11 +912,12 @@
 				5917299927F4A0720080303E /* Constants.swift in Sources */,
 				591728F827F4957E0080303E /* SceneDelegate.swift in Sources */,
 				591729AE27F553FC0080303E /* ActivityGroupViewModel.swift in Sources */,
+				593E67262816400B003FAD22 /* HUD.swift in Sources */,
 				5917297727F4A0720080303E /* Optional+Unwrap.swift in Sources */,
 				5917299E27F4A6F70080303E /* ActivityModel.swift in Sources */,
 				591729AC27F553730080303E /* ActivityGroupModel.swift in Sources */,
 				5917298727F4A0720080303E /* HomeScreenController.swift in Sources */,
-				593E672228163A59003FAD22 /* UserDefaultsKey.swift in Sources */,
+				593E672228163A59003FAD22 /* UserDefaultsDataType.swift in Sources */,
 				591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */,
 				5917297527F4A0720080303E /* UIView+Subviews.swift in Sources */,
 				5917297627F4A0720080303E /* UITableView+Extension.swift in Sources */,

@@ -11,13 +11,11 @@ import RxCocoa
 import SafariServices
 
 class DetailScreenViewController: BaseViewController {
-    
-    static func instantiate(activityViewModel: ActivityViewModel) -> BaseViewController {
-        let controller = DetailScreenViewController()
-        controller.viewModel = DetailScreenViewModel(activityViewModel: activityViewModel)
-        return controller
-    }
-    
+
+    // MARK: - PROPERTIES
+    private var viewModel: DetailScreenViewModel!
+    private let disposeBag = DisposeBag()
+
     // MARK: - OUTLET
     @IBOutlet private weak var activityLbl: UILabel!
     @IBOutlet private weak var participantLbl: UILabel!
@@ -26,10 +24,12 @@ class DetailScreenViewController: BaseViewController {
     @IBOutlet private weak var typeLbl: UILabel!
     @IBOutlet private weak var linkLbl: UILabel!
     @IBOutlet private weak var linkBtn: UIButton!
-    
-    // MARK: - PROPERTIES
-    private var viewModel: DetailScreenViewModel!
-    private let disposeBag = DisposeBag()
+
+    static func instantiate(activityViewModel: ActivityViewModel) -> BaseViewController {
+        let controller = DetailScreenViewController()
+        controller.viewModel = DetailScreenViewModel(activityViewModel: activityViewModel)
+        return controller
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

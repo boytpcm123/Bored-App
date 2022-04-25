@@ -8,15 +8,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import ProgressHUD
 
 class HomeScreenController: BaseViewController {
     
-    static func instantiate() -> BaseViewController {
-        let controller = HomeScreenController()
-        controller.viewModel = HomeScreenViewModel()
-        return controller
-    }
+    // MARK: - PROPERTIES
+    private var viewModel: HomeScreenViewModel!
+    private let disposeBag = DisposeBag()
+    private var listActivityGroup: [ActivityGroupViewModel] = []
+    private let refreshControl = UIRefreshControl()
     
     // MARK: - OUTLET
     @IBOutlet private weak var tableView: UITableView! {
@@ -34,12 +33,12 @@ class HomeScreenController: BaseViewController {
     }
     @IBOutlet private weak var settingBtn: UIButton!
     @IBOutlet private weak var emptyTextLbl: UILabel!
-    
-    // MARK: - PROPERTIES
-    private var viewModel: HomeScreenViewModel!
-    private let disposeBag = DisposeBag()
-    private var listActivityGroup: [ActivityGroupViewModel] = []
-    private let refreshControl = UIRefreshControl()
+
+    static func instantiate() -> BaseViewController {
+        let controller = HomeScreenController()
+        controller.viewModel = HomeScreenViewModel()
+        return controller
+    }
     
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
@@ -74,13 +73,13 @@ extension HomeScreenController {
             .asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchActivities()
-                ProgressHUD.show()
+                HUD.toggleLoading(isLoading: true)
             })
             .disposed(by: disposeBag)
         
         viewModel.showLoading
             .subscribe(onNext: { [weak self] isLoading in
-                isLoading ? ProgressHUD.show() : ProgressHUD.dismiss()
+                HUD.toggleLoading(isLoading: isLoading)
                 if !isLoading {
                     self?.refreshControl.endRefreshing()
                 }

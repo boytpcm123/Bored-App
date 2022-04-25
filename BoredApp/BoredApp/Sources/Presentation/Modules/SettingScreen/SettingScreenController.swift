@@ -11,12 +11,12 @@ import RxCocoa
 
 class SettingScreenController: BaseViewController {
     
-    static func instantiate(onApplySaveSetting: @escaping ((_ settingChanged: Bool) -> Void)) -> BaseViewController {
-        let controller = SettingScreenController()
-        controller.viewModel = SettingScreenViewModel()
-        controller.onApplySaveSetting = onApplySaveSetting
-        return controller
-    }
+    // MARK: - PROPERTIES
+    private var viewModel: SettingScreenViewModel!
+    private var onApplySaveSetting:((_ settingChanged: Bool) -> Void)!
+    private let disposeBag = DisposeBag()
+    private var listSettingType: [ActivitySettingViewModel] = []
+    private var isSettingChanged: Bool = false
     
     // MARK: - OUTLET
     @IBOutlet private weak var nightModeSwitch: UISwitch!
@@ -40,12 +40,12 @@ class SettingScreenController: BaseViewController {
     }
     @IBOutlet private weak var closeSettingBtn: UIButton!
     
-    // MARK: - PROPERTIES
-    private var viewModel: SettingScreenViewModel!
-    private var onApplySaveSetting:((_ settingChanged: Bool) -> Void)!
-    private let disposeBag = DisposeBag()
-    private var listSettingType: [ActivitySettingViewModel] = []
-    private var isSettingChanged: Bool = false
+    static func instantiate(onApplySaveSetting: @escaping ((_ settingChanged: Bool) -> Void)) -> BaseViewController {
+        let controller = SettingScreenController()
+        controller.viewModel = SettingScreenViewModel()
+        controller.onApplySaveSetting = onApplySaveSetting
+        return controller
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,10 +94,12 @@ extension SettingScreenController {
             .bind(to:
                     tableView.rx.items(
                         cellIdentifier: SettingActivityCell.dequeueIdentifier,
-                        cellType: SettingActivityCell.self)) { _, activitySettingViewModel, cell in
-                            cell.bindData(activitySettingViewModel)
-                        }
-                        .disposed(by: disposeBag)
+                        cellType: SettingActivityCell.self
+                    )
+            ) { _, activitySettingViewModel, cell in
+                cell.bindData(activitySettingViewModel)
+            }
+            .disposed(by: disposeBag)
         
         Observable.zip(tableView.rx.modelSelected(ActivitySettingViewModel.self),
                        tableView.rx.itemSelected)
