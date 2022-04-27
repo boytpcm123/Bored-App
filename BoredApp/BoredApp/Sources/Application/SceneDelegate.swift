@@ -6,28 +6,18 @@
 //
 
 import UIKit
-import Swinject
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var assembler: Assembler!
-    internal let container = Container()
-
     var window: UIWindow?
-    private var router: AppCoordinator = AppCoordinator()
+    private let router = AppCoordinator().strongRouter
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
 
-        // setup di
-        assembler = Assembler([
-            GeneralAssembly()
-        ], container: container)
-
-        router.setRoot(for: window)
-        self.window = window
+        setupCoordinator(with: window)
     }
 }
 
@@ -44,7 +34,8 @@ extension SceneDelegate {
 // MARK: - SUPPORT FUCTIONS
 extension SceneDelegate {
 
-    private func setupCoordinator() {
-
+    private func setupCoordinator(with window: UIWindow) {
+        self.window = window
+        router.setRoot(for: window)
     }
 }

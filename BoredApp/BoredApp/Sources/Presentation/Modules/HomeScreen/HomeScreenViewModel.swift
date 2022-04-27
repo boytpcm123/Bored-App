@@ -13,7 +13,7 @@ import XCoordinator
 struct HomeScreenViewModel {
     
     // MARK: - PROPERTIES
-    private let router: UnownedRouter<AppRoute>?
+    private let router: UnownedRouter<AppRoute>
     private let userDefaults: UserDefaultManagerProtocol
     private let disposeBag = DisposeBag()
     private let boredNetworkManager: BoredNetworkManagerProtocol
@@ -22,7 +22,7 @@ struct HomeScreenViewModel {
     var dataList = BehaviorRelay(value: [ActivityGroupViewModel]())
     let showLoading = BehaviorSubject<Bool>(value: true)
     
-    init(router: UnownedRouter<AppRoute>? = nil,
+    init(router: UnownedRouter<AppRoute>,
          boredNetworkManager: BoredNetworkManagerProtocol = BoredNetworkManager(),
          userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
         self.router = router
@@ -111,12 +111,12 @@ extension HomeScreenViewModel {
     }
 
     func showSetting(settingChanged: @escaping SettingChanged) {
-        self.router?.trigger(.setting(settingChanged))
+        self.router.trigger(.setting(settingChanged))
     }
 
     func showDetailActivity(at indexPath: IndexPath) {
         let activity = getActivity(at: indexPath)
-        self.router?.trigger(.detail(activity))
+        self.router.trigger(.detail(activity))
     }
 }
 

@@ -8,8 +8,6 @@
 import Foundation
 import XCoordinator
 
-typealias SettingChanged = ((_ settingChanged: Bool) -> Void)
-
 enum AppRoute: Route {
     case home
     case setting(SettingChanged)
