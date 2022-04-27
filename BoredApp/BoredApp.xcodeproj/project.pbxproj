@@ -46,6 +46,7 @@
 		591729C327F6CF0C0080303E /* SettingActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591729C127F6CF0C0080303E /* SettingActivityCell.xib */; };
 		591729C727F6D3820080303E /* ActivitySettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C627F6D3820080303E /* ActivitySettingViewModel.swift */; };
 		591729C927F6EB4B0080303E /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591729C827F6EB4B0080303E /* UserDefaultManager.swift */; };
+		592AABF62818DDFB009969FC /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592AABF52818DDFB009969FC /* UICollectionView+Extension.swift */; };
 		593E672228163A59003FAD22 /* UserDefaultsDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672128163A59003FAD22 /* UserDefaultsDataType.swift */; };
 		593E672428163A78003FAD22 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E672328163A78003FAD22 /* API.swift */; };
 		593E67262816400B003FAD22 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593E67252816400B003FAD22 /* HUD.swift */; };
@@ -129,6 +130,7 @@
 		591729C127F6CF0C0080303E /* SettingActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingActivityCell.xib; sourceTree = "<group>"; };
 		591729C627F6D3820080303E /* ActivitySettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySettingViewModel.swift; sourceTree = "<group>"; };
 		591729C827F6EB4B0080303E /* UserDefaultManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		592AABF52818DDFB009969FC /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		593E672128163A59003FAD22 /* UserDefaultsDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataType.swift; sourceTree = "<group>"; };
 		593E672328163A78003FAD22 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		593E67252816400B003FAD22 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				5917293327F4A0720080303E /* Color+Application.swift */,
 				5917293427F4A0720080303E /* UIView+Subviews.swift */,
 				5917293527F4A0720080303E /* UITableView+Extension.swift */,
+				592AABF52818DDFB009969FC /* UICollectionView+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				5917299227F4A0720080303E /* BoredService.swift in Sources */,
 				5917298827F4A0720080303E /* BaseViewController.swift in Sources */,
 				591729A027F4A8D60080303E /* ActivityViewModel.swift in Sources */,
+				592AABF62818DDFB009969FC /* UICollectionView+Extension.swift in Sources */,
 				591729B927F613F30080303E /* SettingScreenController.swift in Sources */,
 				5917299127F4A0720080303E /* BoredNetworkManager.swift in Sources */,
 				593E672F2816AD52003FAD22 /* GeneralAssembly.swift in Sources */,
