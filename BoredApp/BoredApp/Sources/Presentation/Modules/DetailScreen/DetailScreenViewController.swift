@@ -25,10 +25,13 @@ class DetailScreenViewController: BaseViewController {
     @IBOutlet private weak var linkLbl: UILabel!
     @IBOutlet private weak var linkBtn: UIButton!
 
-    static func instantiate(viewModel: DetailScreenViewModel) -> BaseViewController {
-        let controller = DetailScreenViewController()
-        controller.viewModel = viewModel
-        return controller
+    init(viewModel: DetailScreenViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
     }
 
     override func viewDidLoad() {

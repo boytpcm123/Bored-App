@@ -33,12 +33,15 @@ class HomeScreenController: BaseViewController {
     @IBOutlet private weak var settingBtn: UIButton!
     @IBOutlet private weak var emptyTextLbl: UILabel!
 
-    static func instantiate(viewModel: HomeScreenViewModel) -> BaseViewController {
-        let controller = HomeScreenController()
-        controller.viewModel = viewModel
-        return controller
+    init(viewModel: HomeScreenViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
-    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
