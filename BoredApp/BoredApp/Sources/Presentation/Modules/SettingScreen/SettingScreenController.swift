@@ -39,12 +39,15 @@ class SettingScreenController: BaseViewController {
     }
     @IBOutlet private weak var closeSettingBtn: UIButton!
     
-    static func instantiate(viewModel: SettingScreenViewModel,
-                            onApplySaveSetting: @escaping SettingChanged) -> BaseViewController {
-        let controller = SettingScreenController()
-        controller.viewModel = viewModel
-        controller.onApplySaveSetting = onApplySaveSetting
-        return controller
+    init(viewModel: SettingScreenViewModel,
+         onApplySaveSetting: @escaping SettingChanged) {
+        self.viewModel = viewModel
+        self.onApplySaveSetting = onApplySaveSetting
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
     }
     
     override func viewDidLoad() {

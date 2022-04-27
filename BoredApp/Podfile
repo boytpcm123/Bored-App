@@ -6,7 +6,10 @@ def working_pods
   
   # UI
   pod 'ProgressHUD', '~> 2.70'
-  pod 'XCoordinator/Combine', '~> 2.0'
+
+  # Support
+  pod 'XCoordinator', '~> 2.0'
+  pod 'Swinject', '~> 2.8.1'
   
   # Rx
   pod 'RxCocoa', '~> 6.5.0'
