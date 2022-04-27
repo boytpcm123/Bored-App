@@ -6,3 +6,4 @@
 import UIKit
 
 typealias AlertCompletion = (UIAlertAction) -> Void
+typealias SettingChanged = (Bool) -> Void

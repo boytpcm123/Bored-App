@@ -13,14 +13,14 @@ import XCoordinator
 struct SettingScreenViewModel {
     
     // MARK: - PROPERTIES
-    private let router: UnownedRouter<AppRoute>?
+    private let router: UnownedRouter<AppRoute>
     private let userDefaults: UserDefaultManagerProtocol
     
     var dataList = BehaviorRelay(value: [ActivitySettingViewModel]())
     let publishIsSelectAll = BehaviorSubject<Bool>(value: true)
     let publishIsSettingChanged = BehaviorSubject<Bool>(value: false)
     
-    init(router: UnownedRouter<AppRoute>? = nil,
+    init(router: UnownedRouter<AppRoute>,
          userDefaults: UserDefaultManagerProtocol = UserDefaultManager()) {
         self.router = router
         self.userDefaults = userDefaults

@@ -17,7 +17,9 @@ class HomeScreenViewModelSpec: QuickSpec {
 
     override func spec() {
 
-        let viewModel = HomeScreenViewModel(boredNetworkManager: MockBoredNetworkManager())
+        let viewModel = HomeScreenViewModel(
+            router: AppCoordinator().unownedRouter,
+            boredNetworkManager: MockBoredNetworkManager())
         let disposeBag = DisposeBag()
 
         describe("Text fetch activities") {
