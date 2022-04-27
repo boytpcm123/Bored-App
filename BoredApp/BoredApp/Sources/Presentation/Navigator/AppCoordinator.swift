@@ -17,28 +17,28 @@ enum AppRoute: Route {
 }
 
 class AppCoordinator: NavigationCoordinator<AppRoute> {
-
+    
     init() {
         super.init(initialRoute: .home)
     }
-
+    
     override func prepareTransition(for route: AppRoute) -> NavigationTransition {
         switch route {
         case .home:
-
+            
             let viewModel = HomeScreenViewModel(router: unownedRouter)
-            let controller = HomeScreenController.instantiate(viewModel: viewModel)
+            let controller = HomeScreenController(viewModel: viewModel)
             return .push(controller)
         case .setting(let settingChanged):
-
+            
             let viewModel = SettingScreenViewModel(router: unownedRouter)
-            let controller = SettingScreenController.instantiate(viewModel: viewModel,
-                                                                 onApplySaveSetting: settingChanged)
+            let controller = SettingScreenController(viewModel: viewModel,
+                                                     onApplySaveSetting: settingChanged)
             return .present(controller, animation: .default)
         case .detail(let activity):
-
+            
             let viewModel = DetailScreenViewModel(router: unownedRouter, activity: activity)
-            let controller = DetailScreenViewController.instantiate(viewModel: viewModel)
+            let controller = DetailScreenViewController(viewModel: viewModel)
             return .push(controller)
         }
     }

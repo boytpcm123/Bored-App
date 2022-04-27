@@ -15,9 +15,10 @@ PODS:
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - SwiftLint (0.46.5)
+  - Swinject (2.8.1)
   - Wormholy (1.6.5)
-  - XCoordinator/Combine (2.2.0):
-    - XCoordinator/Core
+  - XCoordinator (2.2.0):
+    - XCoordinator/Core (= 2.2.0)
   - XCoordinator/Core (2.2.0)
 
 DEPENDENCIES:
@@ -28,8 +29,9 @@ DEPENDENCIES:
   - RxCocoa (~> 6.5.0)
   - RxSwift (~> 6.5.0)
   - SwiftLint (~> 0.46.5)
+  - Swinject (~> 2.8.1)
   - Wormholy (~> 1.6.5)
-  - XCoordinator/Combine (~> 2.0)
+  - XCoordinator (~> 2.0)
 
 SPEC REPOS:
   trunk:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SwiftLint
+    - Swinject
     - Wormholy
     - XCoordinator
 
@@ -55,9 +58,10 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SwiftLint: 2c16e8fa99dac2e440dc0c70ea74d2532048f6cf
+  Swinject: 97112918bd7e0785dc2df7036213f3c8cbba6586
   Wormholy: 3252bc3e55a1847ef9a0976c1377bd77bf3635fa
   XCoordinator: a5f91e43ee944f508529763921165697d3211629
 
-PODFILE CHECKSUM: 24e118e31a33b90a97b68acc2214cef7598192c5
+PODFILE CHECKSUM: f05390712c7c1054370428f67b469654ee04d9dc
 
 COCOAPODS: 1.11.3

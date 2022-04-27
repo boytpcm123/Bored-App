@@ -91,7 +91,7 @@ extension HomeScreenViewModel {
                         }, onFailure: { error in
                             print("error ", error.localizedDescription, activityType)
                             // Check prevent error when some activity change type
-                            if index == maxActivities - 1 {
+                            if index < maxActivities {
                                 dispatchGroup.leave()
                             }
                         }, onDisposed: {
@@ -125,7 +125,6 @@ extension HomeScreenViewModel {
     
     private func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModel {
         
-        // var listActivity: [ActivityModel] = Array(setActivity)
         let listActivity = setActivity.sorted { $0.accessibility < $1.accessibility }
         let activityGroupModel = ActivityGroupModel(
             activityType: activityType, listActivity: listActivity)
