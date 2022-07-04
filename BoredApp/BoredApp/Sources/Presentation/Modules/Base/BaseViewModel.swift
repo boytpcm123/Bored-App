@@ -7,7 +7,12 @@
 
 import UIKit
 
-struct BaseViewModel {
+protocol BaseViewModelProtocol {
+
+    func getNightModeSetting() -> Bool
+}
+
+struct BaseViewModel: BaseViewModelProtocol {
     
     private let userDefaults: UserDefaultManagerProtocol
     

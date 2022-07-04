@@ -11,7 +11,7 @@ import XCoordinator
 enum AppRoute: Route {
     case home
     case setting(SettingChanged)
-    case detail(ActivityViewModel)
+    case detail(ActivityViewModelProtocol)
 }
 
 class AppCoordinator: NavigationCoordinator<AppRoute> {

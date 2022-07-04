@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol ActivitySettingViewModelProtocol {
+
+    func getNameActivity() -> String
+    func getStateSelected() -> Bool
+    func getActivityType() -> ActivityType
+}
+
 struct ActivitySettingViewModel: Codable, Equatable {
     
     private let activityType: ActivityType

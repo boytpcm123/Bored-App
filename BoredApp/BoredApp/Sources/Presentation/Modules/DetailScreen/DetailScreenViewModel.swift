@@ -8,13 +8,25 @@
 import Foundation
 import XCoordinator
 
-struct DetailScreenViewModel {
+protocol DetailScreenViewModelProtocol {
+    
+    func getTitleScreen() -> String
+    func getActivity() -> String
+    func getParticipants() -> String
+    func getPrice() -> String
+    func getAccessibility() -> String
+    func getType() -> String
+    func getLink() -> String
+    func getURL() -> URL?
+}
+
+struct DetailScreenViewModel: DetailScreenViewModelProtocol {
 
     private let router: UnownedRouter<AppRoute>
-    private let activityViewModel: ActivityViewModel
+    private let activityViewModel: ActivityViewModelProtocol
     
     init(router: UnownedRouter<AppRoute>,
-         activity: ActivityViewModel) {
+         activity: ActivityViewModelProtocol) {
         self.router = router
         self.activityViewModel = activity
     }

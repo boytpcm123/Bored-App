@@ -12,7 +12,7 @@ class BaseViewController: UIViewController {
     // MARK: - OUTLET
     
     // MARK: - PROPERTIES
-    private var viewModel: BaseViewModel = BaseViewModel()
+    private var viewModel: BaseViewModelProtocol = BaseViewModel()
 
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
