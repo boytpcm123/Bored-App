@@ -34,7 +34,7 @@ class ActivityCell: UITableViewCell {
         participantsLbl.text = ""
     }
     
-    func bindData(_ viewModel: ActivityViewModel) {
+    func bindData(_ viewModel: ActivityViewModelProtocol) {
         activityLbl.text = viewModel.getActivity()
         accessibilityLbl.text = viewModel.getAccessibility()
         participantsLbl.text = viewModel.getParticipants()

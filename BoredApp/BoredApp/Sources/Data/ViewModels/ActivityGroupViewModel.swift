@@ -7,7 +7,14 @@
 
 import Foundation
 
-struct ActivityGroupViewModel {
+protocol ActivityGroupViewModelProtocol {
+
+    func getTypeActivity() -> String
+    func getLengthListActivity() -> Int
+    func getActivity(atIndex index: Int) -> ActivityViewModelProtocol
+}
+
+struct ActivityGroupViewModel: ActivityGroupViewModelProtocol {
     
     private let activityGroupModel: ActivityGroupModel
     
@@ -27,7 +34,7 @@ extension ActivityGroupViewModel {
         return activityGroupModel.listActivity.count
     }
     
-    func getActivity(atIndex index: Int) -> ActivityViewModel {
+    func getActivity(atIndex index: Int) -> ActivityViewModelProtocol {
         let activityModel = activityGroupModel.listActivity[index]
         return ActivityViewModel(activityModel: activityModel)
     }

@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct ActivityViewModel {
+protocol ActivityViewModelProtocol {
+
+    func getType() -> String
+    func getActivity() -> String
+    func getAccessibility() -> String
+    func getPrice() -> String
+    func getParticipants() -> String
+    func getLink() -> String
+}
+
+struct ActivityViewModel: ActivityViewModelProtocol {
     
     private let activityModel: ActivityModel
     

@@ -10,7 +10,22 @@ import RxSwift
 import RxCocoa
 import XCoordinator
 
-struct HomeScreenViewModel {
+protocol HomeScreenViewModelProtocol {
+    
+    var dataList: BehaviorRelay<[ActivityGroupViewModelProtocol]> { get }
+    var showLoading: BehaviorSubject<Bool> { get }
+
+    func getTitleScreen() -> String
+    func getNumDataList() -> Int
+    func getNumListActivity(at section: Int) -> Int
+    func getNameType(at section: Int) -> String
+    func getActivity(at indexPath: IndexPath) -> ActivityViewModelProtocol
+    func fetchActivities()
+    func showSetting(settingChanged: @escaping SettingChanged)
+    func showDetailActivity(at indexPath: IndexPath)
+}
+
+struct HomeScreenViewModel: HomeScreenViewModelProtocol {
     
     // MARK: - PROPERTIES
     private let router: UnownedRouter<AppRoute>
@@ -19,7 +34,7 @@ struct HomeScreenViewModel {
     private let boredNetworkManager: BoredNetworkManagerProtocol
     private let labelQueue = "com.thong.BoredApp.queue"
     
-    var dataList = BehaviorRelay(value: [ActivityGroupViewModel]())
+    var dataList = BehaviorRelay(value: [ActivityGroupViewModelProtocol]())
     let showLoading = BehaviorSubject<Bool>(value: true)
     
     init(router: UnownedRouter<AppRoute>,
@@ -52,7 +67,7 @@ extension HomeScreenViewModel {
         return activityGroup.getTypeActivity()
     }
     
-    func getActivity(at indexPath: IndexPath) -> ActivityViewModel {
+    func getActivity(at indexPath: IndexPath) -> ActivityViewModelProtocol {
         
         let activityGroup = dataList.value[indexPath.section]
         let activity = activityGroup.getActivity(atIndex: indexPath.row)
@@ -65,7 +80,7 @@ extension HomeScreenViewModel {
         let dispatchQueue = DispatchQueue(label: labelQueue, attributes: .concurrent)
         let dispatchSemaphore = DispatchSemaphore(value: 1)
         
-        var listActivityGroup: [ActivityGroupViewModel] = []
+        var listActivityGroup: [ActivityGroupViewModelProtocol] = []
         let maxActivities: Int = getSettingNumActivities()
         let listActivityType: [ActivityType] = getActivityType()
         
@@ -123,7 +138,7 @@ extension HomeScreenViewModel {
 // MARK: - SUPPORT FUNCTIONS
 extension HomeScreenViewModel {
     
-    private func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModel {
+    private func convertSetList(activityType: ActivityType, setActivity: [ActivityModel]) -> ActivityGroupViewModelProtocol {
         
         let listActivity = setActivity.sorted { $0.accessibility < $1.accessibility }
         let activityGroupModel = ActivityGroupModel(

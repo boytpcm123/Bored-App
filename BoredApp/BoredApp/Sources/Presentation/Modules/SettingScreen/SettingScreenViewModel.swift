@@ -10,7 +10,23 @@ import RxSwift
 import RxCocoa
 import XCoordinator
 
-struct SettingScreenViewModel {
+protocol SettingScreenViewModelProtocol {
+    
+    var dataList: BehaviorRelay<[ActivitySettingViewModel]> { get }
+    var publishIsSelectAll: BehaviorSubject<Bool> { get }
+    var publishIsSettingChanged: BehaviorSubject<Bool> { get }
+
+    func getTitleScreen() -> String
+    func getNightModeSetting() -> Bool
+    func getStateSelectAll()
+    func getNumberActivities() -> Float
+    func updateStateSelect(atIndex index: Int)
+    func updateSelectAllActivityType(_ value: Bool)
+    func saveNightModeValue(withState state: Bool)
+    func saveAllSetting(selectAllState: Bool, numberActivities: Float)
+}
+
+struct SettingScreenViewModel: SettingScreenViewModelProtocol {
     
     // MARK: - PROPERTIES
     private let router: UnownedRouter<AppRoute>

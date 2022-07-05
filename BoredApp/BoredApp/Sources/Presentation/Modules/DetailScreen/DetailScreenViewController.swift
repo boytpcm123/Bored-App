@@ -13,7 +13,7 @@ import SafariServices
 class DetailScreenViewController: BaseViewController {
 
     // MARK: - PROPERTIES
-    private var viewModel: DetailScreenViewModel!
+    private var viewModel: DetailScreenViewModelProtocol!
     private let disposeBag = DisposeBag()
 
     // MARK: - OUTLET
@@ -25,7 +25,7 @@ class DetailScreenViewController: BaseViewController {
     @IBOutlet private weak var linkLbl: UILabel!
     @IBOutlet private weak var linkBtn: UIButton!
 
-    init(viewModel: DetailScreenViewModel) {
+    init(viewModel: DetailScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

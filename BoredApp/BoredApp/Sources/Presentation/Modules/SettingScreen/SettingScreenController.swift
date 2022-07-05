@@ -12,7 +12,7 @@ import RxCocoa
 class SettingScreenController: BaseViewController {
     
     // MARK: - PROPERTIES
-    private var viewModel: SettingScreenViewModel!
+    private var viewModel: SettingScreenViewModelProtocol!
     private var onApplySaveSetting: SettingChanged!
     private let disposeBag = DisposeBag()
     private var isSettingChanged: Bool = false
@@ -39,7 +39,7 @@ class SettingScreenController: BaseViewController {
     }
     @IBOutlet private weak var closeSettingBtn: UIButton!
     
-    init(viewModel: SettingScreenViewModel,
+    init(viewModel: SettingScreenViewModelProtocol,
          onApplySaveSetting: @escaping SettingChanged) {
         self.viewModel = viewModel
         self.onApplySaveSetting = onApplySaveSetting

@@ -12,7 +12,7 @@ import RxCocoa
 class HomeScreenController: BaseViewController {
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenViewModel!
+    private var viewModel: HomeScreenViewModelProtocol!
     private let disposeBag = DisposeBag()
     private let refreshControl = UIRefreshControl()
     
@@ -33,7 +33,7 @@ class HomeScreenController: BaseViewController {
     @IBOutlet private weak var settingBtn: UIButton!
     @IBOutlet private weak var emptyTextLbl: UILabel!
 
-    init(viewModel: HomeScreenViewModel) {
+    init(viewModel: HomeScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

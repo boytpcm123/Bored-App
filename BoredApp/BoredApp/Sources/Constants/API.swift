@@ -8,7 +8,7 @@
 extension Constants {
 
     enum API {
-        static let base: String = "https://www.boredapi.com/api"
+        static let base: String = "http://www.boredapi.com/api"
         static let activity: String = "/activity"
     }
 }
