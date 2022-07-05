@@ -28,14 +28,11 @@ jobs:
       with:
         ref: ${{ github.ref }}
 
-    - name: Move to project Xcode
-      run: cd BoredApp
-
-    - name: Install cocoapods libraries
-      run: pod install
-
-    - name: Test - Fastlane tests
-      run: fastlane test
+    - name: Setup and run tests
+      working-directory: ./BoredApp
+      run: |
+        pod install
+        fastlane test
 
     # - name: Build
     #   run: swift build -v
