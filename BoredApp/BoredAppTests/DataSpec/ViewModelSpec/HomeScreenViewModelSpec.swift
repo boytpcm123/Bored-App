@@ -30,7 +30,7 @@ class HomeScreenViewModelSpec: QuickSpec {
                         .catchAndReturn([])
                         .subscribe(onNext: { listActivityGroup in
                             print(listActivityGroup)
-                            expect(listActivityGroup.isEmpty).to(beFalse(), description: "Should have false value")
+                            expect(listActivityGroup.isEmpty).to(beTrue(), description: "Should have false value")
                         })
                         .disposed(by: disposeBag)
                     viewModel.fetchActivities()
