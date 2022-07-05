@@ -1,0 +1,23 @@
+name: Swift
+
+on:
+  push:
+    branches: 
+    - develop
+    - setup-github-action
+  pull_request:
+    branches: 
+    - develop
+    - setup-github-action
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
