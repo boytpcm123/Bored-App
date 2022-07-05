@@ -12,7 +12,7 @@ on: [push]
 
 jobs:
   test:
-
+    name: Testing App
     runs-on: macos-latest
     timeout-minutes: 15
 
@@ -28,8 +28,14 @@ jobs:
       with:
         ref: ${{ github.ref }}
 
+    - name: Move to project Xcode
+      run: cd BoredApp
+
+    - name: Install cocoapods libraries
+      run: pod install
+
     - name: Test - Fastlane tests
-      run: bundle exec fastlane test
+      run: fastlane test
 
     # - name: Build
     #   run: swift build -v
