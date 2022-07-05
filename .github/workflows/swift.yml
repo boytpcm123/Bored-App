@@ -15,6 +15,9 @@ jobs:
     name: Testing App
     runs-on: macos-latest
     timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ./BoredApp
 
     steps:
 
@@ -29,7 +32,6 @@ jobs:
         ref: ${{ github.ref }}
 
     - name: Setup and run tests
-      working-directory: ./BoredApp
       run: |
         pod install
         fastlane ios tests
