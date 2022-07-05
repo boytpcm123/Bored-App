@@ -32,7 +32,7 @@ jobs:
       working-directory: ./BoredApp
       run: |
         pod install
-        fastlane test
+        fastlane ios tests
 
     # - name: Build
     #   run: swift build -v
